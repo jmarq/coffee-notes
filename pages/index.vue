@@ -9,17 +9,18 @@
           alt="a hot cup of joseph"
           loading="lazy"
         />
-        <button @click.prevent="saveNotes" class="coffee-button">
+        <!-- <button @click.prevent="saveNotes" class="coffee-button">
           save notes
         </button>
         <button @click.prevent="loadNotes" class="coffee-button">
           load notes (will overwrite current notes)
-        </button>
+        </button> -->
       </section>
       <div class="links">
-        <n-link class="link" to="add">another page</n-link>
+        <n-link class="link" to="add">add a note</n-link>
       </div>
       <div class="coffee">
+        <h1 v-if="!notes.length" class="title">no notes yet</h1>
         <ul ref="listo">
           <li v-for="note in notes" :key="note">{{ note }}</li>
         </ul>

@@ -7,7 +7,7 @@ import {
 // STATE
 export const state = () => {
   return {
-    notes: ["it's good", "I'll yeah"],
+    notes: [],
     initialLoadComplete: false,
   };
 };
