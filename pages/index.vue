@@ -124,7 +124,8 @@ body {
 .coffee li {
   @apply text-lg;
   @apply font-bold;
-  @apply pb-2 pt-1;
+  @apply pb-2;
+  @apply pt-1;
   border-bottom: 1px solid turquoise;
 }
 
