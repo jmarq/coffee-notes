@@ -1,7 +1,7 @@
 import {
   LOCALSTORAGE_KEY,
-  serializeNotes,
   deserializeNotes,
+  saveNotesToLocalStorage,
 } from './localstorageHelpers';
 
 export const state = () => {
@@ -13,23 +13,23 @@ export const state = () => {
 export const mutations = {
   addNote: (state, payload) => {
     state.notes.push(payload || 'a new note');
+    return state;
   },
   setNotes: (state, payload) => {
     state.notes = payload;
+    return state;
   },
 };
 
 export const actions = {
-  saveNotesToLocalStorage({ commit, state }) {
-    console.log(commit);
-    console.log('in saveNotesToLocalStorage action');
-    if (process.browser) {
-      console.log('in the browser, not SSR');
-      const serializedNotes = serializeNotes(state);
-      window.localStorage.setItem(LOCALSTORAGE_KEY, serializedNotes);
-    }
+  addNoteAndSave({ commit, dispatch }, payload) {
+    commit('addNote', payload);
+    dispatch('saveNotes');
   },
-  loadNotesFromLocalStorage({ commit, state }) {
+  saveNotes({ state }) {
+    saveNotesToLocalStorage(state);
+  },
+  loadNotes({ commit, state }) {
     console.log('in loadNotesFromLocalStorage');
     if (process.browser) {
       console.log('in the browser, not SSR');

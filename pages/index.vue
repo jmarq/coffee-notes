@@ -40,8 +40,8 @@ export default {
       addNote: 'addNote',
     }),
     ...mapActions({
-      saveNotes: 'saveNotesToLocalStorage',
-      loadNotes: 'loadNotesFromLocalStorage',
+      saveNotes: 'saveNotes',
+      loadNotes: 'loadNotes',
     }),
   },
 };

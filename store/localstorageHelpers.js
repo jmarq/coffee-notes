@@ -12,3 +12,12 @@ export const deserializeNotes = (stringNotes) => {
     return [];
   }
 };
+
+export const saveNotesToLocalStorage = (state) => {
+  console.log('in saveNotesToLocalStorage action');
+  if (process.browser) {
+    console.log('in the browser, not SSR');
+    const serializedNotes = serializeNotes(state);
+    window.localStorage.setItem(LOCALSTORAGE_KEY, serializedNotes);
+  }
+};

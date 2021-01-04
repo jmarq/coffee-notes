@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   data() {
     return {
@@ -28,9 +28,10 @@ export default {
     ...mapMutations({
       addNote: 'addNote',
     }),
+    ...mapActions(['addNoteAndSave']),
     addCoolNote() {
       if (this.newNote) {
-        this.addNote(this.newNote);
+        this.addNoteAndSave(this.newNote);
         this.newNote = '';
       }
     },
