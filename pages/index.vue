@@ -7,6 +7,7 @@
           class="kangaroos"
           src="https://www.darbypop.com/wp-content/uploads/2020/06/Darby-Bites-99-copy.png"
           alt="a hot cup of joseph"
+          loading="lazy"
         />
         <button @click.prevent="saveNotes" class="coffee-button">
           save notes

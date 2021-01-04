@@ -4,6 +4,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+    if (process.browser) {
+      this.$store.dispatch('performInitialLoad');
+    }
+  },
+};
+</script>
 <style>
 @tailwind utilities;
 html {
