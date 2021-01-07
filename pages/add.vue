@@ -16,7 +16,7 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   data() {
     return {
-      newNote: 'init',
+      newNote: '',
     };
   },
   computed: {

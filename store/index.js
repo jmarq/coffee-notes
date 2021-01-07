@@ -1,7 +1,9 @@
+// https://medium.com/@brandonaaskov/how-to-test-nuxt-stores-with-jest-9a5d55d54b28
+
 import {
-  LOCALSTORAGE_KEY,
-  deserializeNotes,
   saveNotesToLocalStorage,
+  loadNotesFromLocalStorage,
+  localStorageAvailable,
 } from './localstorageHelpers';
 
 // STATE
@@ -24,6 +26,9 @@ export const mutations = {
   markInitialLoadComplete: (state) => {
     state.initialLoadComplete = true;
   },
+  markInitialLoadIncomplete: (state) => {
+    state.initialLoadComplete = false;
+  },
 };
 // ACTIONS
 export const actions = {
@@ -37,18 +42,17 @@ export const actions = {
   },
 
   loadNotes({ commit, state }) {
-    console.log('in loadNotesFromLocalStorage');
-    if (process.browser) {
+    console.log('in loadNotes');
+    if (localStorageAvailable()) {
       console.log('in the browser, not SSR');
-      const storedNotes = window.localStorage.getItem(LOCALSTORAGE_KEY);
-      const deserializedNotes = deserializeNotes(storedNotes);
+      const deserializedNotes = loadNotesFromLocalStorage();
       commit('setNotes', deserializedNotes);
     }
   },
 
   performInitialLoad({ commit, dispatch, state }) {
     if (!state.initialLoadComplete) {
-      if (process.browser) {
+      if (localStorageAvailable()) {
         console.log('performing initial notes load');
         dispatch('loadNotes');
         commit('markInitialLoadComplete');
