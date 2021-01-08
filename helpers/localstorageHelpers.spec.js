@@ -1,6 +1,6 @@
 import * as helpers from './localstorageHelpers.js';
 import { isBrowser } from './browserHelpers.js';
-//https://medium.com/@qjli/how-to-mock-specific-module-function-in-jest-715e39a391f4
+// https://medium.com/@qjli/how-to-mock-specific-module-function-in-jest-715e39a391f4
 // localStorageAvailable.mockImplementation(() => true);
 
 // let localStorageMock;

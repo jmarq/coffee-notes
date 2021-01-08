@@ -1,3 +1,3 @@
 export const isBrowser = () => {
-  return true; //Boolean(process.browser);
+  return Boolean(process.browser);
 };
