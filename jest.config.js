@@ -1,6 +1,7 @@
 module.exports = {
   // https://medium.com/@brandonaaskov/how-to-test-nuxt-stores-with-jest-9a5d55d54b28
   globalSetup: '<rootDir>/jest.setup.js',
+  setupFiles: ['jest-localstorage-mock'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',

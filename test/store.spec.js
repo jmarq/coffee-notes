@@ -8,11 +8,13 @@ import { createLocalVue } from '@vue/test-utils';
 //  more https://stackoverflow.com/questions/48790927/how-to-change-mock-implementation-on-a-per-single-test-basis-jestjs/54361996#54361996
 import {
   saveNotesToLocalStorage,
-  localStorageAvailable,
   loadNotesFromLocalStorage,
-} from '../store/localstorageHelpers.js';
+} from '../helpers/localstorageHelpers.js';
 
-jest.mock('../store/localstorageHelpers.js');
+import { isBrowser } from '../helpers/browserHelpers.js';
+
+jest.mock('../helpers/browserHelpers.js');
+jest.mock('../helpers/localstorageHelpers.js');
 
 describe('store test exploration', () => {
   // making a local vue rather than global
@@ -40,7 +42,7 @@ describe('store test exploration', () => {
       'say',
       'yeehaw',
     ]);
-    localStorageAvailable.mockImplementation(() => true);
+    isBrowser.mockImplementation(() => true);
     jest.clearAllMocks();
   });
 
@@ -102,5 +104,14 @@ describe('store test exploration', () => {
     await store.dispatch('performInitialLoad');
     expect(store.state.notes).toEqual([]);
     expect(loadNotesFromLocalStorage).not.toHaveBeenCalled();
+  });
+
+  it('doesnt try loading from localstorage if not in browser', async () => {
+    isBrowser.mockImplementation(() => false);
+    store.commit('setNotes', []);
+    await store.dispatch('loadNotes');
+    store.commit('markInitialLoadIncomplete');
+    await store.dispatch('performInitialLoad');
+    expect(store.state.notes).toEqual([]);
   });
 });

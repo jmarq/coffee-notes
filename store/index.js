@@ -3,8 +3,9 @@
 import {
   saveNotesToLocalStorage,
   loadNotesFromLocalStorage,
-  localStorageAvailable,
-} from './localstorageHelpers';
+  // isBrowser,
+} from '../helpers/localstorageHelpers';
+import { isBrowser } from '../helpers/browserHelpers';
 
 // STATE
 export const state = () => {
@@ -16,7 +17,7 @@ export const state = () => {
 // MUTATIONS
 export const mutations = {
   addNote: (state, payload) => {
-    state.notes.push(payload || 'a new note');
+    state.notes.push(payload);
     return state;
   },
   setNotes: (state, payload) => {
@@ -43,7 +44,7 @@ export const actions = {
 
   loadNotes({ commit, state }) {
     console.log('in loadNotes');
-    if (localStorageAvailable()) {
+    if (isBrowser()) {
       console.log('in the browser, not SSR');
       const deserializedNotes = loadNotesFromLocalStorage();
       commit('setNotes', deserializedNotes);
@@ -52,7 +53,7 @@ export const actions = {
 
   performInitialLoad({ commit, dispatch, state }) {
     if (!state.initialLoadComplete) {
-      if (localStorageAvailable()) {
+      if (isBrowser()) {
         console.log('performing initial notes load');
         dispatch('loadNotes');
         commit('markInitialLoadComplete');
