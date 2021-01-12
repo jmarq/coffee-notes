@@ -1,11 +1,16 @@
 // https://medium.com/@brandonaaskov/how-to-test-nuxt-stores-with-jest-9a5d55d54b28
 
+import VuexORM from '@vuex-orm/core';
+import database from '@/database';
+
 import {
   saveNotesToLocalStorage,
   loadNotesFromLocalStorage,
   // isBrowser,
 } from '../helpers/localstorageHelpers';
 import { isBrowser } from '../helpers/browserHelpers';
+
+export const plugins = [VuexORM.install(database)];
 
 // STATE
 export const state = () => {
@@ -16,6 +21,11 @@ export const state = () => {
 };
 // MUTATIONS
 export const mutations = {
+  // proof of (perhaps misguided) concept
+  //  to set vuex-orm state wholesale from localstorage string
+  setEntities: (state, payload) => {
+    state.entities = payload;
+  },
   addNote: (state, payload) => {
     state.notes.push(payload);
     return state;
