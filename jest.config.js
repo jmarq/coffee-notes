@@ -17,5 +17,7 @@ module.exports = {
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue',
     '<rootDir>/store/**/*',
+    '<rootDir>/helpers/**/*',
+    '<rootDir>/models/**/*',
   ],
 };
