@@ -14,7 +14,6 @@ export const plugins = [VuexORM.install(database)];
 // STATE
 export const state = () => {
   return {
-    notes: [],
     initialLoadComplete: false,
   };
 };
