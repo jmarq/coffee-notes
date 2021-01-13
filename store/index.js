@@ -6,6 +6,8 @@ import database from '@/database';
 import {
   saveNotesToLocalStorage,
   loadNotesFromLocalStorage,
+  saveEntitiesToLocalStorage,
+  loadEntitiesFromLocalStorage,
   // isBrowser,
 } from '../helpers/localstorageHelpers';
 import { isBrowser } from '../helpers/browserHelpers';
@@ -45,7 +47,8 @@ export const mutations = {
 export const actions = {
   addNoteAndSave({ commit, dispatch }, payload) {
     commit('addNote', payload);
-    dispatch('saveNotes');
+    // dispatch('saveNotes');
+    dispatch('saveEntities');
   },
 
   saveNotes({ state }) {
@@ -61,11 +64,25 @@ export const actions = {
     }
   },
 
+  loadEntities({ commit, state }) {
+    console.log('in loadEntities');
+    const stateFromLocalStorage = loadEntitiesFromLocalStorage();
+    if (stateFromLocalStorage) {
+      commit('setEntities', stateFromLocalStorage);
+    }
+  },
+
+  saveEntities({ commit, state }) {
+    console.log('in save entities');
+    saveEntitiesToLocalStorage(state.entities);
+  },
+
   performInitialLoad({ commit, dispatch, state }) {
     if (!state.initialLoadComplete) {
       if (isBrowser()) {
         console.log('performing initial notes load');
-        dispatch('loadNotes');
+        // dispatch('loadNotes');
+        dispatch('loadEntities');
         commit('markInitialLoadComplete');
       }
     } else {

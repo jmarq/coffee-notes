@@ -1,3 +1,6 @@
 export const isBrowser = () => {
-  return Boolean(process.browser);
+  const result = Boolean(process.browser);
+  console.log('isBrowser');
+  console.log({ result });
+  return result;
 };

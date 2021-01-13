@@ -20,9 +20,11 @@
         <n-link class="link" to="add">add a note</n-link>
       </div>
       <div class="coffee">
-        <h1 v-if="!notes.length" class="title">no notes yet</h1>
-        <ul ref="listo">
-          <li v-for="note in notes" :key="note">{{ note }}</li>
+        <h1 v-if="!notes2.length" class="title">no notes yet</h1>
+        <ul ref="listo2">
+          <li v-for="note in notes2" :key="note.id">
+            {{ note.id }}) {{ note.bean.name }} - {{ note.content }}
+          </li>
         </ul>
       </div>
     </div>
@@ -31,11 +33,15 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
+import Note from '@/models/Note';
 export default {
   computed: {
     ...mapState({
-      notes: 'notes',
+      // notes: 'notes',
     }),
+    notes2: () => {
+      return Note.query().with('bean').get();
+    },
   },
   methods: {
     ...mapMutations({
