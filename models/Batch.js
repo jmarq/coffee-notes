@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Model } from '@vuex-orm/core';
 import Bean from './Bean';
 export default class Note extends Model {
-  static entity = 'notes';
+  static entity = 'batches';
 
   static fields() {
     return {

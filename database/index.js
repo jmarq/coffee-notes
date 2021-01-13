@@ -1,10 +1,10 @@
 import { Database } from '@vuex-orm/core';
-import Note from '@/models/Note';
+import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 
 const database = new Database();
 
-database.register(Note);
+database.register(Batch);
 database.register(Bean);
 
 export default database;

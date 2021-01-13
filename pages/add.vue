@@ -13,7 +13,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import Note from '@/models/Note';
+import Batch from '@/models/Batch';
 
 export default {
   data() {
@@ -21,17 +21,12 @@ export default {
       newNoteContent: '',
     };
   },
-  computed: {
-    ...mapState({
-      notes: 'notes',
-    }),
-  },
   methods: {
-    ...mapActions(['addNoteAndSave', 'saveEntities']),
+    ...mapActions(['saveEntities']),
     addCoolNote() {
       if (this.newNoteContent) {
         // add to vuex-orm store
-        Note.insert({
+        Batch.insert({
           data: {
             content: this.newNoteContent,
             bean: { name: 'cool beans', id: 1 },

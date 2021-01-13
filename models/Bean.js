@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { Model } from '@vuex-orm/core';
-import Note from './Note';
+import Batch from './Batch';
 
 export default class Bean extends Model {
   static entity = 'beans';
@@ -10,7 +10,7 @@ export default class Bean extends Model {
     return {
       id: this.uid(() => uuidv4()),
       name: this.string('untitled coffee bean'),
-      notes: this.hasMany(Note, 'bean_id'),
+      batches: this.hasMany(Batch, 'bean_id'),
     };
   }
 }
