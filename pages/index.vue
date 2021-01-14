@@ -20,10 +20,13 @@
         <n-link class="link" to="add">add a note</n-link>
       </div>
       <div class="coffee">
-        <h1 v-if="!notes.length" class="title">no notes yet</h1>
+        <h1 v-if="!batches.length" class="title">no notes yet</h1>
         <ul ref="listo2">
-          <li v-for="note in notes" :key="note.id">
-            {{ note.id }}) {{ note.bean.name }} - {{ note.content }}
+          <li v-for="batch in batches" :key="batch.id">
+            {{ new Date(batch.date).toLocaleString() }}
+            {{ batch.bean.name }} ({{ batch.bean.roast_profile }}
+            roast) -
+            {{ batch.note }}
           </li>
         </ul>
       </div>
@@ -35,7 +38,7 @@
 import Batch from '@/models/Batch';
 export default {
   computed: {
-    notes: () => {
+    batches: () => {
       return Batch.query().with('bean').get();
     },
   },
@@ -121,6 +124,7 @@ body {
   @apply font-bold;
   @apply pb-2;
   @apply pt-1;
+  @apply text-left;
   border-bottom: 1px solid turquoise;
 }
 

@@ -8,9 +8,14 @@ export default class Note extends Model {
   static fields() {
     return {
       id: this.uid(() => uuidv4()),
-      content: this.string('no content provided'),
       bean_id: this.string(null).nullable(),
       bean: this.belongsTo(Bean, 'bean_id'),
+      note: this.string('no note provided'),
+      date: this.number(undefined).nullable(),
+      grind_size: this.number(undefined).nullable(),
+      batch_size_oz: this.number(undefined).nullable(),
+      grinds_oz: this.number(undefined).nullable(),
+      rating: this.number(undefined).nullable(),
     };
   }
 }

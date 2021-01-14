@@ -11,6 +11,7 @@ export default class Bean extends Model {
       id: this.uid(() => uuidv4()),
       name: this.string('untitled coffee bean'),
       batches: this.hasMany(Batch, 'bean_id'),
+      roast_profile: this.string(undefined).nullable(),
     };
   }
 }

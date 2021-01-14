@@ -28,8 +28,9 @@ export default {
         // add to vuex-orm store
         Batch.insert({
           data: {
-            content: this.newNoteContent,
-            bean: { name: 'cool beans', id: 1 },
+            bean: { name: 'cool beans', id: 1, roast_profile: 'medium' },
+            note: this.newNoteContent,
+            date: Date.now(),
           },
         });
         // save to localstorage (this probably should not be a mutation, rather a helper/plugin?)
