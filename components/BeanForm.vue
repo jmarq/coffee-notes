@@ -1,7 +1,7 @@
 <template>
   <div class="bean-form-wrapper">
     enter bean details here!!
-    <form>
+    <form @submit.prevent>
       <label for="bean-name">Bean Name</label>
       <input
         id="bean-name"
@@ -11,7 +11,7 @@
       />
       <select
         id="roast-profile"
-        v-model="newBean.roastProfile"
+        v-model="newBean.roast_profile"
         @change="formChange"
       >
         <option
@@ -23,7 +23,7 @@
         </option>
       </select>
       <p>new bean name: {{ newBean.name }}</p>
-      <p>selected roast: {{ newBean.roastProfile }}</p>
+      <p>selected roast: {{ newBean.roast_profile }}</p>
       <p>bean json: {{ JSON.stringify(newBean) }}</p>
     </form>
   </div>
@@ -37,7 +37,7 @@ export default {
       // maybe there should be a watcher on newBean that sends the $emit?
       newBean: {
         name: '',
-        roastProfile: 'Medium',
+        roast_profile: 'Medium',
       },
       roastProfileOptions: ['Light', 'Medium', 'Dark'],
     };

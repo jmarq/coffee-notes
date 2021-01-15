@@ -2,7 +2,10 @@
   <div class="wrapper">
     <h1 class="title">add a new coffee note please</h1>
     <n-link class="link" to="/">home</n-link>
-    <BatchForm @updateBatch="setBatch"></BatchForm>
+    <BatchForm
+      @updateBatch="setBatch"
+      @batchSubmitted="addCoolNote"
+    ></BatchForm>
     <!-- <form>
       <input v-model="newNoteContent" type="text" />
       <button class="coffee-button" @click.prevent="addCoolNote">
@@ -51,23 +54,14 @@ export default {
     setBatch(batch) {
       this.batch = batch;
     },
-    addCoolNote() {
-      if (this.valid()) {
-        // add to vuex-orm store
-        Batch.insert({
-          data: {
-            // bean: { name: 'cool beans', id: 1, roast_profile: 'medium' },
-            bean_id: 1,
-            note: this.newNoteContent,
-            date: Date.now(),
-          },
-        });
-        // save to localstorage (this probably should not be a mutation, rather a helper/plugin?)
-        console.log('attempting to call this.saveEntities from add.vue');
-        this.saveEntities();
-
-        this.newNoteContent = '';
-      }
+    addCoolNote(payload) {
+      // add to vuex-orm store
+      Batch.insert({
+        data: payload,
+      });
+      // save to localstorage (this probably should not be a mutation, rather a helper/plugin?)
+      console.log('attempting to call this.saveEntities from add.vue');
+      this.saveEntities();
     },
   },
 };
