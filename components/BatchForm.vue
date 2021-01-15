@@ -45,22 +45,9 @@ export default {
     bean: { customBeanValidator },
   },
   methods: {
-    // this has gotten messy and confusing.
-    // need to rethink the flow of this data.
-    // how do the bean/bean_id forms flow into batch?
-    //  how does batch flow into add?
-    // which component(s) for validation?
-    // good progress!!!
     updateBean(bean) {
       this.bean = bean;
       this.bean_id = undefined;
-      // console.log('new bean for batch form');
-      // console.log(bean);
-      // console.log(JSON.stringify(this.bean));
-      // // this.$emit('updateBatch', {
-      // //   bean,
-      // //   bean_id: this.bean_id,
-      // // });
       console.log('bean updated in BatchForm. invalid?');
       console.log({ invalid: this.$v.$invalid });
     },

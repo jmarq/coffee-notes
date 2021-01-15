@@ -14,18 +14,9 @@
 
 <script>
 import { mapActions } from 'vuex';
-// import { required, minLength } from 'vuelidate/lib/validators';
 
 import Batch from '@/models/Batch';
 import BatchForm from '@/components/BatchForm';
-
-// const customBeanIdValidator = (value, vm) => {
-//   return vm.bean || value;
-// };
-
-// const customBeanValidator = (value, vm) => {
-//   return vm.bean_id || value;
-// };
 
 export default {
   components: { BatchForm },
