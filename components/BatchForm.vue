@@ -3,8 +3,10 @@
     <p>enter coffee batch details here</p>
     <p v-if="$v.$invalid">It's Bad</p>
     <p v-else>It's Good</p>
-    <bean-selector @beanSelectionChange="updateBeanId"></bean-selector>
-    <BeanForm v-if="!bean_id" @beanChange="updateBean"></BeanForm>
+    <section class="beans">
+      <bean-selector @beanSelectionChange="updateBeanId"></bean-selector>
+      <BeanForm :show="!bean_id" @beanChange="updateBean"></BeanForm>
+    </section>
     <p>batch-specific fields to go here later</p>
     <section class="batch-fields">
       <div>
@@ -24,17 +26,19 @@
         />
       </div>
       <div>
-        <label for="note">Note</label>
-        <input id="note" v-model="note" type="text" />
-      </div>
-      <div>
         <label for="rating">Rating (scale ??-??)</label>
         <input id="rating" v-model.number="rating" type="number" />
       </div>
+      <div>
+        <label for="note">Note</label>
+        <textarea id="note" v-model="note" type="text" />
+      </div>
     </section>
-    <section v-if="!$v.$invalid">
-      <button class="coffee-button" @click="submit">submit</button>
-    </section>
+    <transition name="button-fade">
+      <section v-if="!$v.$invalid" class="submit-section">
+        <button class="coffee-button" @click="submit">submit</button>
+      </section>
+    </transition>
   </div>
 </template>
 
@@ -128,7 +132,76 @@ export default {
 
 <style scoped>
 .batch-form-wrapper {
-  @apply bg-teal-200;
-  @apply text-blue-900;
+  background-color: rgba(20, 15, 0, 0.65);
+  @apply text-blue-300;
+  text-shadow: 2px 2px 2px black;
+  @apply m-3;
+  @apply p-3;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.beans {
+  @apply border;
+  @apply border-red-900;
+  height: 250px;
+}
+
+label {
+  @apply text-lg;
+  @apply font-bold;
+  @apply block;
+  @apply mt-2;
+}
+
+input,
+textarea {
+  @apply text-lg;
+  @apply font-bold;
+  @apply p-1;
+  @apply rounded-lg;
+  @apply border-2;
+  @apply border-red-900;
+  @apply block;
+  width: 100%;
+}
+
+input,
+textarea,
+select,
+option {
+  @apply text-red-900;
+}
+
+.batch-form-wrapper option,
+.batch-form-wrapper select {
+  @apply text-red-900;
+}
+
+.submit-section {
+  @apply pt-2;
+}
+.button-fade-enter-active,
+.button-fade-leave-active {
+  transition: 300ms linear;
+}
+
+.button-fade-enter,
+.button-fade-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.batch-fields {
+  @apply flex;
+  @apply flex-wrap;
+  @apply justify-around;
+}
+.batch-fields div {
+  flex-basis: 300px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  @apply m-1;
 }
 </style>

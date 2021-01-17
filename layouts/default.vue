@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <Nuxt />
   </div>
 </template>
@@ -91,5 +91,11 @@ html {
   @apply shadow-md;
   font-family: serif;
   text-shadow: 5px 5px 5px #222;
+}
+
+.main-wrapper {
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

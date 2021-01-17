@@ -58,11 +58,23 @@ export default {
       // add to vuex-orm store
       Batch.insert({
         data: payload,
+      }).then((result) => {
+        const createdId = result.batches[0].id;
+        console.log(result.batches[0].id);
+        console.log('attempting to call this.saveEntities from add.vue');
+        this.saveEntities();
+        this.$router.push({ path: '/', query: { newId: createdId } });
       });
       // save to localstorage (this probably should not be a mutation, rather a helper/plugin?)
-      console.log('attempting to call this.saveEntities from add.vue');
-      this.saveEntities();
     },
   },
 };
 </script>
+
+<style scoped>
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+}
+</style>

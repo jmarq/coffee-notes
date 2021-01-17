@@ -18,11 +18,16 @@
       </section>
       <div class="links">
         <n-link class="link" to="add">add a note</n-link>
+        <p>{{ createdBatch }} was created?</p>
       </div>
       <div class="coffee">
         <h1 v-if="!batches.length" class="title">no notes yet</h1>
         <ul ref="listo2">
-          <li v-for="batch in batches" :key="batch.id">
+          <li
+            v-for="batch in batches"
+            :key="batch.id"
+            :class="{ justCreated: batch.id == createdBatch }"
+          >
             {{ new Date(batch.date).toLocaleString() }}
             {{ batch.bean.name }} ({{ batch.bean.roast_profile }}
             roast) -
@@ -40,6 +45,10 @@ export default {
   computed: {
     batches: () => {
       return Batch.query().with('bean').get();
+    },
+    createdBatch() {
+      console.log(this.$route);
+      return this.$route.query.newId;
     },
   },
 };
@@ -127,6 +136,10 @@ body {
   @apply text-left;
   border-bottom: 1px solid turquoise;
 }
+.coffee li.justCreated {
+  @apply bg-orange-200;
+  animation: highlightnew 1000ms ease-in-out alternate infinite;
+}
 
 .coffee-button {
   @apply bg-orange-900;
@@ -134,6 +147,15 @@ body {
   @apply font-bold;
   @apply p-8;
   @apply rounded-md;
+}
+
+@keyframes highlightnew {
+  from {
+    @apply bg-green-200;
+  }
+  to {
+    @apply bg-orange-300;
+  }
 }
 
 .coffee button:hover {

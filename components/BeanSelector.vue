@@ -1,15 +1,21 @@
 <template>
-  <select @change="selectionChange" v-model="selectedBeanId">
-    <option :value="undefined">enter new bean</option>
-    <option v-for="bean in beanOptions" :key="bean.id" :value="bean.id">
-      {{ bean.name }}
-    </option>
-  </select>
+  <section>
+    <label for="bean-select">Beans used</label>
+    <select id="bean-select" @change="selectionChange" v-model="selectedBeanId">
+      <option :value="undefined">enter new bean</option>
+      <option v-for="bean in beanOptions" :key="bean.id" :value="bean.id">
+        {{ bean.name }}
+      </option>
+    </select>
+    <selected-bean :bean-id="selectedBeanId"></selected-bean>
+  </section>
 </template>
 
 <script>
 import Bean from '@/models/Bean';
+import SelectedBean from './SelectedBean';
 export default {
+  components: { SelectedBean },
   data() {
     return {
       selectedBeanId: undefined,
@@ -28,3 +34,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+select,
+option {
+  @apply text-red-900;
+}
+</style>
