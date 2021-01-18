@@ -1,7 +1,7 @@
 <template>
   <div class="batch-form-wrapper">
     <p>enter coffee batch details here</p>
-    <p v-if="$v.$invalid">It's Bad</p>
+    <p v-if="$v.$invalid" class="invalid-warning">It's Bad</p>
     <p v-else>It's Good</p>
     <section class="beans">
       <bean-selector @beanSelectionChange="updateBeanId"></bean-selector>
@@ -47,18 +47,22 @@ import { numeric, required } from 'vuelidate/lib/validators';
 import BeanForm from './BeanForm';
 import BeanSelector from './BeanSelector';
 const customBeanIdValidator = (value, vm) => {
+  // return true;
   if (vm.bean || value) {
     return true;
   } else {
+    console.log('invalid bean id');
     return false;
   }
-  // return true;
 };
 
 const customBeanValidator = (value, vm) => {
+  // return true;
   if (vm.bean_id || (value && value.name && value.roast_profile)) {
     return true;
   } else {
+    console.log('invalid bean');
+
     return false;
   }
 };
@@ -106,6 +110,7 @@ export default {
 
       console.log('bean_id updated in BatchForm. invalid?');
       console.log({ invalid: this.$v.$invalid });
+      console.log({ id });
     },
     submit() {
       console.log('submitting?');

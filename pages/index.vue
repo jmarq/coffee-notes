@@ -44,6 +44,7 @@ import Batch from '@/models/Batch';
 export default {
   computed: {
     batches: () => {
+      // make this a helper method that is easier to mock;
       return Batch.query().with('bean').get();
     },
     createdBatch() {
