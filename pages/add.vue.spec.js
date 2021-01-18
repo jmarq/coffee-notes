@@ -2,12 +2,17 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import AddPage from '@/pages/add.vue';
 import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
+
+import VuexORM from '@vuex-orm/core';
+import database from '@/database';
+
+import flushPromises from 'flush-promises';
 // import VueRouter from 'vue-router';
-import Batch from '@/models/Batch';
+// import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 
-jest.mock('@/models/Batch');
-jest.mock('@/models/Bean');
+// jest.mock('@/models/Batch');
+// jest.mock('@/models/Bean');
 
 const localVue = createLocalVue();
 
@@ -19,14 +24,16 @@ const mockRouter = {
 };
 
 describe('add page', () => {
-  let actions, state, mutations;
+  let actions, state, mutations, plugins;
   let store;
-  beforeEach(() => {
+  beforeEach(async () => {
     actions = {
       saveNotes: jest.fn(),
       loadNotes: jest.fn(),
       addNoteAndSave: jest.fn(),
-      saveEntities: jest.fn(),
+      saveEntities: jest.fn(() => {
+        console.log('in mock saveEntities');
+      }),
     };
     state = {
       notes: ['yes', 'no', 'villain'],
@@ -34,18 +41,18 @@ describe('add page', () => {
     mutations = {
       addNote: jest.fn(),
     };
+
+    plugins = [VuexORM.install(database)];
+
     store = new Vuex.Store({
       actions,
       state,
       mutations,
+      plugins,
     });
 
-    Batch.insert = jest.fn(() => {
-      return Promise.resolve({ batches: [{ id: 1 }] });
-    });
-
-    Bean.all = jest.fn(() => {
-      return [{ id: 1, name: 'testBean', roastProfile: 'medium' }];
+    await Bean.insert({
+      data: { id: 1, name: 'testBean', roast_profile: 'medium' },
     });
   });
   it('is a Vue instance', () => {
@@ -91,7 +98,9 @@ describe('add page', () => {
     expect(theButton.exists()).toEqual(true);
 
     await theButton.trigger('click');
-    expect(Batch.insert).toHaveBeenCalled();
+    await flushPromises();
+
+    expect(actions.saveEntities).toHaveBeenCalled();
     expect(mockRouter.push).toHaveBeenCalled();
   });
 });
