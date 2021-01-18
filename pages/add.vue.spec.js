@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import AddPage from '@/pages/add.vue';
 import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
-import VueRouter from 'vue-router';
+// import VueRouter from 'vue-router';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 

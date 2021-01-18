@@ -3,7 +3,7 @@ import Index from '@/pages/index.vue';
 import Vuex from 'vuex';
 
 import Batch from '@/models/Batch';
-import Bean from '@/models/Bean';
+// import Bean from '@/models/Bean';
 
 jest.mock('@/models/Batch');
 jest.mock('@/models/Bean');
