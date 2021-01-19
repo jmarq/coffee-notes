@@ -6,17 +6,42 @@
     <button @click="addFakeData" class="coffee-button">
       add some fake data
     </button>
-    <h2>batches:</h2>
+
+    <button @click="deleteAllFakeData" class="coffee-button">
+      delete all fake data
+    </button>
+
+    <h2 class="text-xl font-bold">batches:</h2>
     <ul>
-      <li v-for="batch in allBatches" :key="batch.id">
+      <li
+        v-for="batch in allBatches"
+        :key="batch.id"
+        class="border-b-2 border-red-800"
+      >
+        <button
+          class="p-1 bg-red-500 rounded-md"
+          @click="deleteBatch(batch.id)"
+        >
+          X
+        </button>
         <span>batch_id: {{ batch.id }}</span> -
-        <span>bean_id: {{ batch.bean.id }}</span>
+        <span v-if="batch.bean"> bean_id: {{ batch.bean.id }}</span>
       </li>
     </ul>
 
-    <h2>beans:</h2>
+    <h2 class="text-xl font-bold">beans:</h2>
     <ul>
-      <li v-for="bean in allBeans" :key="bean.id">
+      <li
+        v-for="bean in allBeans"
+        :key="bean.id"
+        class="border-b-2 border-green-800"
+      >
+        <button
+          class="p-1 bg-orange-500 rounded-md"
+          @click="deleteBean(bean.id)"
+        >
+          X
+        </button>
         <span>id: {{ bean.id }} -</span>
         <span>name: {{ bean.name }}</span>
       </li>
@@ -28,24 +53,38 @@
 import {
   addFakeBeans,
   addFakeBatches,
-  // allBeans,
-  // allBatches,
-  allFakeBeans,
-  allFakeBatches,
+  allBeans,
+  allBatches,
+  // allFakeBeans,
+  // allFakeBatches,
+  deleteBatch,
+  deleteBean,
+  deleteAllFakeData,
 } from '@/helpers/dataHelpers';
 export default {
   computed: {
     allBeans() {
-      return allFakeBeans();
+      return allBeans();
     },
     allBatches() {
-      return allFakeBatches();
+      return allBatches();
     },
   },
   methods: {
     addFakeData() {
       const beanIds = addFakeBeans(10);
       addFakeBatches(15, beanIds);
+    },
+    deleteBatch(id) {
+      console.log(`attempting to delete batch ${id}`);
+      deleteBatch(id);
+    },
+    deleteBean(id) {
+      console.log(`attempting to delete bean ${id}`);
+      deleteBean(id);
+    },
+    deleteAllFakeData() {
+      deleteAllFakeData();
     },
   },
 };

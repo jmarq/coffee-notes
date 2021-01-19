@@ -12,6 +12,27 @@ export const allBatches = () => {
   return Batch.query().with('bean').get();
 };
 
+export const deleteBatch = (batchId) => {
+  return Batch.delete(batchId);
+};
+
+export const deleteBean = (beanId) => {
+  return Bean.delete(beanId);
+};
+
+export const deleteAllFakeBatches = () => {
+  return Batch.delete((batch) => batch.id.includes(MOCK_FLAG));
+};
+
+export const deleteAllFakeBeans = () => {
+  return Bean.delete((bean) => bean.id.includes(MOCK_FLAG));
+};
+
+export const deleteAllFakeData = () => {
+  deleteAllFakeBatches();
+  deleteAllFakeBeans();
+};
+
 export const allFakeBeans = () => {
   return Bean.query()
     .where((bean) => bean.id.includes(MOCK_FLAG))
