@@ -12,8 +12,10 @@
 </template>
 
 <script>
-import Bean from '@/models/Bean';
+// import Bean from '@/models/Bean';
+import { allBeans } from '@/helpers/dataHelpers';
 import SelectedBean from './SelectedBean';
+
 export default {
   components: { SelectedBean },
   data() {
@@ -23,7 +25,7 @@ export default {
   },
   computed: {
     beanOptions() {
-      return Bean.all();
+      return allBeans();
     },
   },
   methods: {

@@ -18,6 +18,7 @@
       </section>
       <div class="links">
         <n-link class="link" to="add">add a note</n-link>
+        <n-link class="link" to="debug">debug</n-link>
         <p>{{ createdBatch }} was created?</p>
       </div>
       <div class="coffee">
@@ -40,12 +41,12 @@
 </template>
 
 <script>
-import Batch from '@/models/Batch';
+// import Batch from '@/models/Batch';
+import { allBatches } from '@/helpers/dataHelpers';
 export default {
   computed: {
     batches: () => {
-      // make this a helper method that is easier to mock;
-      return Batch.query().with('bean').get();
+      return allBatches();
     },
     createdBatch() {
       console.log(this.$route);
