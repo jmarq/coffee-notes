@@ -14,13 +14,14 @@ export const allBatches = () => {
 
 export const allFakeBeans = () => {
   return Bean.query()
-    .where('id', (id) => id.includes(MOCK_FLAG))
+    .where((bean) => bean.id.includes(MOCK_FLAG))
     .get();
 };
 
 export const allFakeBatches = () => {
   return Batch.query()
-    .where('id', (id) => id.includes(MOCK_FLAG))
+    .where((batch) => batch.id.includes(MOCK_FLAG))
+    .with('bean')
     .get();
 };
 
