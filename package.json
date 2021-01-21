@@ -17,6 +17,9 @@
     "faker": "^5.1.0",
     "nuxt": "^2.14.6",
     "uuid": "^8.3.2",
+    "vega": "^5.18.0",
+    "vega-embed": "^6.15.0",
+    "vega-lite": "^4.17.0",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
