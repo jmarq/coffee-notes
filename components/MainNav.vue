@@ -1,9 +1,9 @@
 <template>
   <div class="links">
     <n-link class="link" to="/">home</n-link>
-    <n-link class="link" to="add">add a note</n-link>
-    <n-link class="link" to="debug">debug</n-link>
-    <n-link class="link" to="vega-try">vega?</n-link>
+    <n-link class="link" to="/add">add a note</n-link>
+    <n-link class="link" to="/debug">debug</n-link>
+    <n-link class="link" to="/vega-try">vega?</n-link>
   </div>
 </template>
 
