@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">coffee-notes</h1>
+      <!-- <h1 class="title">coffee-notes</h1> -->
       <section class="header-image">
         <img
           class="kangaroos"
@@ -9,18 +9,8 @@
           alt="a hot cup of joseph"
           loading="lazy"
         />
-        <!-- <button @click.prevent="saveNotes" class="coffee-button">
-          save notes
-        </button>
-        <button @click.prevent="loadNotes" class="coffee-button">
-          load notes (will overwrite current notes)
-        </button> -->
       </section>
-      <div class="links">
-        <n-link class="link" to="add">add a note</n-link>
-        <n-link class="link" to="debug">debug</n-link>
-        <p>{{ createdBatch }} was created?</p>
-      </div>
+      <p>{{ createdBatch }} was created?</p>
       <div class="coffee">
         <h1 v-if="!batches.length" class="title">no notes yet</h1>
         <ul ref="listo2">
@@ -57,11 +47,6 @@ export default {
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
 body {
   @apply bg-purple-200;
   background-image: url(https://i.pinimg.com/originals/8b/0c/23/8b0c231572d5748b926af83998b23767.jpg);
@@ -70,21 +55,6 @@ body {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  @apply text-6xl;
-  @apply italic;
-  @apply font-bold;
-  @apply text-green-200;
-  @apply underline;
-  @apply shadow-md;
-  font-family: serif;
-  text-shadow: 5px 5px 5px #222;
 }
 
 .header-image {
@@ -104,29 +74,13 @@ body {
   padding-top: 15px;
 }
 
-.link {
-  @apply text-3xl;
-  @apply bg-yellow-300;
-  @apply p-2;
-  @apply text-purple-900;
-  @apply rounded-r-md;
-  @apply mb-2;
-  @apply inline-block;
-  box-shadow: 5px 5px 5px #222;
-}
-
-.link:hover {
-  @apply bg-green-300;
-  @apply underline;
-  box-shadow: 0px 0px 15px #909;
-}
-
 .coffee ul {
+  @apply p-2;
   @apply bg-pink-100;
   @apply rounded-md;
   @apply border-indigo-600;
   @apply border;
-  @apply overflow-y-scroll;
+  @apply overflow-y-auto;
   max-height: 400px;
 }
 
@@ -143,14 +97,6 @@ body {
   animation: highlightnew 1000ms ease-in-out alternate infinite;
 }
 
-.coffee-button {
-  @apply bg-orange-900;
-  @apply text-green-300;
-  @apply font-bold;
-  @apply p-8;
-  @apply rounded-md;
-}
-
 @keyframes highlightnew {
   from {
     @apply bg-green-200;
@@ -158,10 +104,5 @@ body {
   to {
     @apply bg-orange-300;
   }
-}
-
-.coffee button:hover {
-  @apply bg-orange-700;
-  @apply text-green-900;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" appear>
+  <transition name="fade">
     <div v-if="show" class="bean-form-wrapper">
       enter bean details here!!
       <form @submit.prevent>
@@ -26,7 +26,6 @@
         <section class="new-bean-preview">
           <p>new bean name: {{ newBean.name }}</p>
           <p>selected roast: {{ newBean.roast_profile }}</p>
-          <p>bean json: {{ JSON.stringify(newBean) }}</p>
         </section>
       </form>
     </div>

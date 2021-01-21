@@ -7,7 +7,6 @@
       <bean-selector @beanSelectionChange="updateBeanId"></bean-selector>
       <BeanForm :show="!bean_id" @beanChange="updateBean"></BeanForm>
     </section>
-    <p>batch-specific fields to go here later</p>
     <section class="batch-fields">
       <div>
         <label for="grind_size">Grind size</label>

@@ -1,11 +1,14 @@
 <template>
   <div class="main-wrapper">
+    <main-nav />
     <Nuxt />
   </div>
 </template>
 
 <script>
+import MainNav from '@/components/MainNav';
 export default {
+  components: { MainNav },
   mounted() {
     if (process.browser) {
       this.$store.dispatch('performInitialLoad');
@@ -13,18 +16,21 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
 @tailwind utilities;
+@import '../assets/testing.scss';
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 *,
@@ -34,33 +40,10 @@ html {
   margin: 0;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.main-wrapper {
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .coffee-button {
@@ -71,15 +54,15 @@ html {
   @apply rounded-md;
 }
 
-.link {
-  @apply text-3xl;
-  @apply bg-yellow-300;
-  @apply p-2;
-  @apply text-purple-900;
-  @apply rounded-r-md;
-  @apply mb-2;
-  @apply inline-block;
-  box-shadow: 5px 5px 5px #222;
+.coffee-button:hover {
+  @apply bg-orange-700;
+  @apply text-green-900;
+}
+
+.link:hover {
+  @apply bg-green-300;
+  @apply underline;
+  box-shadow: 0px 0px 15px #909;
 }
 
 .title {
@@ -89,13 +72,8 @@ html {
   @apply text-green-200;
   @apply underline;
   @apply shadow-md;
+  @apply text-center;
   font-family: serif;
   text-shadow: 5px 5px 5px #222;
-}
-
-.main-wrapper {
-  max-width: 850px;
-  margin-left: auto;
-  margin-right: auto;
 }
 </style>

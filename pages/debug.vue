@@ -1,7 +1,6 @@
 <template>
   <div class="debug-wrapper">
-    <h1>debug tools</h1>
-    <n-link class="link" to="/">home</n-link>
+    <h1 class="title">debug tools</h1>
 
     <button @click="addFakeData" class="coffee-button">
       add some fake data
@@ -91,7 +90,14 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  @apply text-gray-900;
+  text-shadow: 5px 5px 5px #9ae6b4;
+}
 .debug-wrapper {
-  @apply bg-green-200;
+  @apply bg-gray-100;
+  @apply bg-opacity-75;
+  @apply p-2;
+  @apply rounded-md;
 }
 </style>

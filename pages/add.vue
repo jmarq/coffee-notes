@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <h1 class="title">add a new coffee note please</h1>
-    <n-link class="link" to="/">home</n-link>
     <BatchForm
       @updateBatch="setBatch"
       @batchSubmitted="addCoolNote"
