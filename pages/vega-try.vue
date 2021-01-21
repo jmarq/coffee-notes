@@ -11,31 +11,53 @@
 
 <script>
 import vegaEmbed from 'vega-embed';
+import Batch from '@/models/Batch';
 export default {
   data() {
     return {
       chart: undefined,
-      chartData: [
-        { category: 'A', amount: 28 },
-        { category: 'B', amount: 55 },
-        { category: 'C', amount: 43 },
-        { category: 'D', amount: 91 },
-        { category: 'E', amount: 81 },
-        { category: 'F', amount: 53 },
-        { category: 'G', amount: 19 },
-        { category: 'H', amount: 87 },
-      ],
+      // chartData: [
+      //   { category: 'A', amount: 28 },
+      //   { category: 'B', amount: 55 },
+      //   { category: 'C', amount: 43 },
+      //   { category: 'D', amount: 91 },
+      //   { category: 'E', amount: 81 },
+      //   { category: 'F', amount: 53 },
+      //   { category: 'G', amount: 19 },
+      //   { category: 'H', amount: 87 },
+      // ],
     };
   },
 
   computed: {
+    chartData() {
+      // return [
+      //   { category: 'A', amount: 28 },
+      //   { category: 'B', amount: 55 },
+      //   { category: 'C', amount: 43 },
+      //   { category: 'D', amount: 91 },
+      //   { category: 'E', amount: 81 },
+      //   { category: 'F', amount: 53 },
+      //   { category: 'G', amount: 19 },
+      //   { category: 'H', amount: 87 },
+      // ];
+      return Batch.query()
+        .with('bean')
+        .get()
+        .filter((batch) => batch.rating)
+        .map((batch) => ({
+          category: batch.id,
+          amount: batch.rating,
+        }));
+    },
     spec() {
       return {
         $schema: 'https://vega.github.io/schema/vega/v5.json',
         description:
           'A basic bar chart example, with value labels shown upon mouse hover.',
-        width: 400,
-        height: 200,
+        // I wonder if this needs to be a vega-lite spec for width: 'container' to work?
+        width: 700,
+        height: 400,
         padding: 5,
 
         data: [
@@ -121,27 +143,35 @@ export default {
     },
   },
   watch: {
-    spec() {
+    chartData() {
       this.drawChart();
     },
   },
 
   mounted() {
-    this.drawChart();
+    if (this.chartData.length) {
+      console.log('in mounted');
+      console.log({ data: this.chartData });
+      this.drawChart();
+    }
   },
 
   methods: {
     changeData() {
       console.log('new data plz');
       console.log(this.chart);
-      this.chartData.push({
-        category: '' + Math.floor(Math.random() * 100000),
-        amount: Math.floor(Math.random() * 100),
-      });
+      // this.chartData.push({
+      //   category: '' + Math.floor(Math.random() * 100000),
+      //   amount: Math.floor(Math.random() * 100),
+      // });
     },
     drawChart() {
       const that = this;
-      vegaEmbed('#chart', this.spec).then(function (result) {
+      vegaEmbed('#chart', this.spec, {
+        tooltip: { theme: 'dark' },
+        actions: false,
+        renderer: 'svg',
+      }).then(function (result) {
         // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
         console.log('chart has rendered');
         that.chart = result;
@@ -150,3 +180,15 @@ export default {
   },
 };
 </script>
+
+<style>
+/* this style section isn't `scoped` because it targets the vega-created element */
+.vega-wrapper canvas {
+  @apply border-2 border-green-400;
+  @apply bg-orange-200;
+}
+#chart {
+  width: 500px;
+  height: 500px;
+}
+</style>
