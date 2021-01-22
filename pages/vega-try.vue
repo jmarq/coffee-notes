@@ -5,7 +5,6 @@
     <client-only>
       <div id="chart"></div>
     </client-only>
-    <button class="coffee-button" @click="changeData">data change</button>
   </div>
 </template>
 
@@ -16,132 +15,48 @@ export default {
   data() {
     return {
       chart: undefined,
-      // chartData: [
-      //   { category: 'A', amount: 28 },
-      //   { category: 'B', amount: 55 },
-      //   { category: 'C', amount: 43 },
-      //   { category: 'D', amount: 91 },
-      //   { category: 'E', amount: 81 },
-      //   { category: 'F', amount: 53 },
-      //   { category: 'G', amount: 19 },
-      //   { category: 'H', amount: 87 },
-      // ],
     };
   },
 
   computed: {
     chartData() {
-      // return [
-      //   { category: 'A', amount: 28 },
-      //   { category: 'B', amount: 55 },
-      //   { category: 'C', amount: 43 },
-      //   { category: 'D', amount: 91 },
-      //   { category: 'E', amount: 81 },
-      //   { category: 'F', amount: 53 },
-      //   { category: 'G', amount: 19 },
-      //   { category: 'H', amount: 87 },
-      // ];
+      // maybe allow the user to filter the results by date/roast/bean/etc
       return Batch.query()
         .with('bean')
         .get()
-        .filter((batch) => batch.rating)
-        .map((batch) => ({
-          category: batch.id,
-          amount: batch.rating,
-        }));
+        .filter((batch) => batch.rating);
     },
-    spec() {
-      // break this out into its own file or something, it is WAY too much to be clogging up this computed data function
-      // import the file and replace the data attribute.
-      // perhaps use a vega-lite spec generator instead of the full verbose vega style
+    vegaLiteSpec() {
       return {
-        $schema: 'https://vega.github.io/schema/vega/v5.json',
-        description:
-          'A basic bar chart example, with value labels shown upon mouse hover.',
-        // I wonder if this needs to be a vega-lite spec for width: 'container' to work?
-        width: 700,
-        height: 400,
-        padding: 5,
-
-        data: [
-          {
-            name: 'table',
-            values: this.chartData,
-          },
-        ],
-
-        signals: [
-          {
-            name: 'tooltip',
-            value: {},
-            on: [
-              { events: 'rect:mouseover', update: 'datum' },
-              { events: 'rect:mouseout', update: '{}' },
-            ],
-          },
-        ],
-
-        scales: [
-          {
-            name: 'xscale',
-            type: 'band',
-            domain: { data: 'table', field: 'category' },
-            range: 'width',
-            padding: 0.05,
-            round: true,
-          },
-          {
-            name: 'yscale',
-            domain: { data: 'table', field: 'amount' },
-            nice: true,
-            range: 'height',
-          },
-        ],
-
-        axes: [
-          { orient: 'bottom', scale: 'xscale' },
-          { orient: 'left', scale: 'yscale' },
-        ],
-
-        marks: [
-          {
-            type: 'rect',
-            from: { data: 'table' },
-            encode: {
-              enter: {
-                x: { scale: 'xscale', field: 'category' },
-                width: { scale: 'xscale', band: 1 },
-                y: { scale: 'yscale', field: 'amount' },
-                y2: { scale: 'yscale', value: 0 },
-              },
-              update: {
-                fill: { value: 'steelblue' },
-              },
-              hover: {
-                fill: { value: 'red' },
-              },
+        $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
+        description: 'A simple bar chart with embedded data.',
+        config: {
+          background: '#eee',
+          padding: 10,
+        },
+        data: {
+          values: this.chartData,
+        },
+        width: 'container',
+        height: 'container',
+        mark: { type: 'circle', tooltip: true },
+        encoding: {
+          // maybe allow the user to change these encodings via ui inputs
+          x: { field: 'date', type: 'temporal' },
+          y: { field: 'rating', type: 'quantitative' },
+          color: {
+            field: 'bean.roast_profile',
+            type: 'nominal',
+            scale: {
+              domain: ['Dark', 'Medium', 'Light'],
+              range: ['#210', '#642', '#b94'],
             },
           },
-          {
-            type: 'text',
-            encode: {
-              enter: {
-                align: { value: 'center' },
-                baseline: { value: 'bottom' },
-                fill: { value: '#333' },
-              },
-              update: {
-                x: { scale: 'xscale', signal: 'tooltip.category', band: 0.5 },
-                y: { scale: 'yscale', signal: 'tooltip.amount', offset: -2 },
-                text: { signal: 'tooltip.amount' },
-                fillOpacity: [
-                  { test: 'datum === tooltip', value: 0 },
-                  { value: 1 },
-                ],
-              },
-            },
-          },
-        ],
+          size: { field: 'grind_size', type: 'q' },
+        },
+        axis: {
+          fontSize: 36,
+        },
       };
     },
   },
@@ -160,17 +75,9 @@ export default {
   },
 
   methods: {
-    changeData() {
-      console.log('new data plz');
-      console.log(this.chart);
-      // this.chartData.push({
-      //   category: '' + Math.floor(Math.random() * 100000),
-      //   amount: Math.floor(Math.random() * 100),
-      // });
-    },
     drawChart() {
       const that = this;
-      vegaEmbed('#chart', this.spec, {
+      vegaEmbed('#chart', this.vegaLiteSpec, {
         tooltip: { theme: 'dark' },
         actions: false,
         renderer: 'svg',
@@ -186,13 +93,18 @@ export default {
 
 <style>
 /* this style section isn't `scoped` because it targets the vega-created element */
-.vega-wrapper canvas {
+.vega-wrapper canvas,
+.vega-wrapper svg {
   @apply border-2;
   @apply border-green-400;
   @apply bg-orange-200;
 }
 #chart {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 800px;
 }
+/* there has to be a better way */
+/* #chart text {
+  font-size: 16px;
+} */
 </style>
