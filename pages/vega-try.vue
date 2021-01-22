@@ -101,7 +101,7 @@ export default {
 }
 #chart {
   width: 100%;
-  height: 800px;
+  height: 700px;
 }
 /* there has to be a better way */
 /* #chart text {
