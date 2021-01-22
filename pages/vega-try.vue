@@ -1,10 +1,9 @@
 <template>
   <div class="vega-wrapper">
     <h1 class="title">vega charts?</h1>
-    <div id="chart-container"></div>
-    <!-- <client-only> -->
-    <div id="chart"></div>
-    <!-- </client-only> -->
+    <div id="chart-container">
+      <div id="chart"></div>
+    </div>
   </div>
 </template>
 
@@ -81,11 +80,13 @@ export default {
         tooltip: { theme: 'dark' },
         actions: false,
         renderer: 'svg',
-      }).then(function (result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        console.log('chart has rendered');
-        that.chart = result;
-      });
+      })
+        .then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+          console.log('chart has rendered');
+          that.chart = result;
+        })
+        .catch((err) => console.log(err));
     },
   },
 };

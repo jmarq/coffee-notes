@@ -7,16 +7,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  computed: {
-    currentPath() {
-      return this.$route.path;
-    },
-  },
-};
-</script>
-
 <style scoped lang="scss">
 .link {
   @apply text-3xl;
