@@ -52,7 +52,7 @@ describe('add page', () => {
     });
 
     await Bean.insert({
-      data: { id: 1, name: 'testBean', roast_profile: 'medium' },
+      data: { name: 'testBean', roast_profile: 'medium' },
     });
   });
   it('is a Vue instance', () => {
