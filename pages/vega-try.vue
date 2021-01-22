@@ -51,6 +51,9 @@ export default {
         }));
     },
     spec() {
+      // break this out into its own file or something, it is WAY too much to be clogging up this computed data function
+      // import the file and replace the data attribute.
+      // perhaps use a vega-lite spec generator instead of the full verbose vega style
       return {
         $schema: 'https://vega.github.io/schema/vega/v5.json',
         description:
@@ -184,7 +187,8 @@ export default {
 <style>
 /* this style section isn't `scoped` because it targets the vega-created element */
 .vega-wrapper canvas {
-  @apply border-2 border-green-400;
+  @apply border-2;
+  @apply border-green-400;
   @apply bg-orange-200;
 }
 #chart {
