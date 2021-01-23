@@ -1,6 +1,11 @@
 <template>
   <div class="vega-wrapper">
     <h1 class="title">vega charts?</h1>
+    <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
+      <option value="batch_size_oz">batch size</option>
+      <option value="grinds_oz">grinds amount</option>
+      <option value="date">date</option>
+    </select>
     <div id="chart-container">
       <div id="chart"></div>
     </div>
@@ -14,6 +19,7 @@ export default {
   data() {
     return {
       chart: undefined,
+      xAxisAttribute: 'date',
     };
   },
 
@@ -41,7 +47,10 @@ export default {
         mark: { type: 'circle', tooltip: true },
         encoding: {
           // maybe allow the user to change these encodings via ui inputs
-          x: { field: 'date', type: 'temporal' },
+          x: {
+            field: this.xAxisAttribute,
+            type: this.xAxisAttribute === 'date' ? 'temporal' : 'quantitative',
+          },
           y: { field: 'rating', type: 'quantitative' },
           color: {
             field: 'bean.roast_profile',
@@ -61,6 +70,9 @@ export default {
   },
   watch: {
     chartData() {
+      this.drawChart();
+    },
+    vegaLiteSpec() {
       this.drawChart();
     },
   },
