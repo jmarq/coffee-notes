@@ -13,7 +13,7 @@
   @apply bg-yellow-300;
   @apply p-2;
   @apply text-purple-900;
-  @apply rounded-r-md;
+  @apply rounded-md;
   @apply mb-2;
   @apply inline-block;
   box-shadow: 5px 5px 5px #222;
