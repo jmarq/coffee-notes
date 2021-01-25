@@ -38,6 +38,17 @@ export default {
         config: {
           background: '#eee',
           padding: 10,
+          axis: {
+            labelFontSize: 16,
+            titleFontSize: 24,
+          },
+          legend: {
+            labelFontSize: 16,
+            titleFontSize: 24,
+          },
+          tooltip: {
+            fontSize: 24,
+          },
         },
         data: {
           values: this.chartData,
@@ -53,6 +64,7 @@ export default {
           },
           y: { field: 'rating', type: 'quantitative' },
           color: {
+            title: 'roast',
             field: 'bean.roast_profile',
             type: 'nominal',
             scale: {
@@ -61,9 +73,6 @@ export default {
             },
           },
           size: { field: 'grind_size', type: 'q' },
-        },
-        axis: {
-          fontSize: 36,
         },
       };
     },
@@ -115,6 +124,9 @@ export default {
 #chart {
   width: 100%;
   height: 700px;
+}
+#vg-tooltip-element {
+  font-size: 16px;
 }
 /* there has to be a better way */
 /* #chart text {
