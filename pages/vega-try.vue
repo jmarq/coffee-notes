@@ -1,10 +1,17 @@
 <template>
   <div class="vega-wrapper">
     <h1 class="title">vega charts?</h1>
+    <label for="x-axis">X Axis</label>
     <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
-      <option value="batch_size_oz">batch size</option>
-      <option value="grinds_oz">grinds amount</option>
-      <option value="date">date</option>
+      <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
+        {{ pair[1].title }}
+      </option>
+    </select>
+    <label for="y-axis">Y Axis</label>
+    <select id="y-axis" v-model="yAxisAttribute" name="y-axis">
+      <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
+        {{ pair[1].title }}
+      </option>
     </select>
     <div id="chart-container">
       <div id="chart"></div>
@@ -40,6 +47,8 @@ export default {
     return {
       chart: undefined,
       xAxisAttribute: 'date',
+      yAxisAttribute: 'rating',
+      axisOptions: Object.entries(axisConfigs),
     };
   },
 
@@ -83,7 +92,11 @@ export default {
             type: axisConfigs[this.xAxisAttribute].type,
             title: axisConfigs[this.xAxisAttribute].title,
           },
-          y: { field: 'rating', type: 'quantitative' },
+          y: {
+            field: this.yAxisAttribute,
+            type: axisConfigs[this.yAxisAttribute].type,
+            title: axisConfigs[this.yAxisAttribute].title,
+          },
           color: {
             title: 'roast',
             field: 'bean.roast_profile',
