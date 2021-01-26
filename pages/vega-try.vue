@@ -75,16 +75,16 @@ export default {
             labelFontSize: 16,
             titleFontSize: 24,
           },
-          tooltip: {
-            fontSize: 24,
-          },
         },
         data: {
           values: this.chartData,
         },
         width: 'container',
         height: 'container',
-        mark: { type: 'circle', tooltip: true },
+        mark: {
+          type: 'circle',
+          tooltip: true,
+        },
         encoding: {
           // maybe allow the user to change these encodings via ui inputs
           x: {
@@ -107,6 +107,20 @@ export default {
             },
           },
           size: { field: 'grind_size', type: 'q' },
+          detail: [
+            {
+              field: 'note',
+              type: 'nominal',
+            },
+            {
+              field: 'batch_size_oz',
+              type: 'quantitative',
+            },
+            {
+              field: 'rating',
+              type: 'quantitative',
+            },
+          ],
         },
       };
     },
@@ -147,7 +161,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 /* this style section isn't `scoped` because it targets the vega-created element */
 .vega-wrapper canvas,
 .vega-wrapper svg {
@@ -161,6 +175,17 @@ export default {
 }
 #vg-tooltip-element {
   font-size: 16px;
+  tr {
+    border-bottom: 1px solid #aaa !important;
+  }
+  td.key {
+    color: rgba(4, 251, 57, 0.952) !important;
+    font-size: 1.5em;
+  }
+  td.value {
+    font-size: 1.5em;
+    text-align: right !important;
+  }
 }
 /* there has to be a better way */
 /* #chart text {
