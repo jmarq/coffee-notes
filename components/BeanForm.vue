@@ -3,16 +3,20 @@
     <div v-if="show" class="bean-form-wrapper">
       enter bean details here!!
       <form @submit.prevent>
-        <label for="bean-name">Bean Name</label>
+        <label for="bean-name" required>Bean Name</label>
         <input
           id="bean-name"
           v-model="newBean.name"
           type="text"
+          required
           @keypress="formChange"
         />
+        <label for="roast-profile" required>Roast Profile</label>
+
         <select
           id="roast-profile"
           v-model="newBean.roast_profile"
+          required
           @change="formChange"
         >
           <option
@@ -49,6 +53,7 @@ export default {
   validations: {
     newBean: {
       name: { required, minLength: minLength(1) },
+      roast_profile: { required },
     },
   },
   methods: {
@@ -79,7 +84,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .bean-form-wrapper {
   @apply border;
   @apply border-purple-700;

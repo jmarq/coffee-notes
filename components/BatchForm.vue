@@ -1,7 +1,6 @@
 <template>
   <div class="batch-form-wrapper">
-    <p>enter coffee batch details here</p>
-    <p v-if="$v.$invalid" class="invalid-warning">It's Bad</p>
+    <p v-if="$v.$invalid" class="invalid-warning">Fill out required fields</p>
     <p v-else>It's Good</p>
     <section class="beans">
       <bean-selector @beanSelectionChange="updateBeanId"></bean-selector>
@@ -17,11 +16,12 @@
         <input id="grinds_oz" v-model.number="grinds_oz" type="number" />
       </div>
       <div>
-        <label for="batch_size_oz">Batch Size (in ounces)</label>
+        <label for="batch_size_oz" required>Batch Size (in ounces)</label>
         <input
           id="batch_size_oz"
           v-model.number="batch_size_oz"
           type="number"
+          required="true"
         />
       </div>
       <div>
@@ -134,7 +134,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .batch-form-wrapper {
   background-color: rgba(20, 15, 0, 0.65);
   @apply text-blue-300;

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">add a new coffee note please</h1>
+    <h1 class="title">Enter batch info</h1>
     <BatchForm
       @updateBatch="setBatch"
       @batchSubmitted="addCoolNote"

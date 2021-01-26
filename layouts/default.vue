@@ -18,7 +18,7 @@ export default {
 </script>
 <style lang="scss">
 @tailwind utilities;
-@import '../assets/testing.scss';
+@import '../assets/main.scss';
 
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
