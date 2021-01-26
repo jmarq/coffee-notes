@@ -15,6 +15,26 @@
 <script>
 import vegaEmbed from 'vega-embed';
 import Batch from '@/models/Batch';
+
+const axisConfigs = {
+  date: {
+    type: 'temporal',
+    title: 'date',
+  },
+  grinds_oz: {
+    type: 'quantitative',
+    title: 'grinds amount',
+  },
+  batch_size_oz: {
+    type: 'quantitative',
+    title: 'batch size',
+  },
+  rating: {
+    type: 'quantitative',
+    title: 'rating',
+  },
+};
+
 export default {
   data() {
     return {
@@ -60,7 +80,8 @@ export default {
           // maybe allow the user to change these encodings via ui inputs
           x: {
             field: this.xAxisAttribute,
-            type: this.xAxisAttribute === 'date' ? 'temporal' : 'quantitative',
+            type: axisConfigs[this.xAxisAttribute].type,
+            title: axisConfigs[this.xAxisAttribute].title,
           },
           y: { field: 'rating', type: 'quantitative' },
           color: {
