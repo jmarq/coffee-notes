@@ -12,6 +12,7 @@ label[required] {
   }
 }
 
+// this isn't specific enough to hit some fields in the batch form.
 input:invalid,
 textarea:invalid,
 select:invalid {
