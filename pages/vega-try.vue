@@ -25,20 +25,35 @@ import Batch from '@/models/Batch';
 
 const axisConfigs = {
   date: {
+    field: 'date',
     type: 'temporal',
     title: 'date',
   },
   grinds_oz: {
+    field: 'grinds_oz',
     type: 'quantitative',
     title: 'grinds amount',
   },
   batch_size_oz: {
+    field: 'batch_size_oz',
     type: 'quantitative',
     title: 'batch size',
   },
   rating: {
+    field: 'rating',
     type: 'quantitative',
     title: 'rating',
+  },
+  mean_rating: {
+    field: 'rating',
+    type: 'quantitative',
+    title: 'mean rating',
+    aggregate: 'mean',
+  },
+  bean_id: {
+    field: 'bean.id',
+    type: 'nominal',
+    title: 'bean',
   },
 };
 
@@ -82,21 +97,18 @@ export default {
         width: 'container',
         height: 'container',
         mark: {
-          type: 'circle',
+          type: 'bar',
           tooltip: true,
         },
         encoding: {
           // maybe allow the user to change these encodings via ui inputs
-          x: {
-            field: this.xAxisAttribute,
-            type: axisConfigs[this.xAxisAttribute].type,
-            title: axisConfigs[this.xAxisAttribute].title,
-          },
-          y: {
-            field: this.yAxisAttribute,
-            type: axisConfigs[this.yAxisAttribute].type,
-            title: axisConfigs[this.yAxisAttribute].title,
-          },
+          // x: {
+          //   field: this.xAxisAttribute,
+          //   type: axisConfigs[this.xAxisAttribute].type,
+          //   title: axisConfigs[this.xAxisAttribute].title,
+          // },
+          x: axisConfigs[this.xAxisAttribute],
+          y: axisConfigs[this.yAxisAttribute],
           color: {
             title: 'roast',
             field: 'bean.roast_profile',
@@ -106,21 +118,21 @@ export default {
               range: ['#210', '#642', '#b94'],
             },
           },
-          size: { field: 'grind_size', type: 'q' },
-          detail: [
-            {
-              field: 'note',
-              type: 'nominal',
-            },
-            {
-              field: 'batch_size_oz',
-              type: 'quantitative',
-            },
-            {
-              field: 'rating',
-              type: 'quantitative',
-            },
-          ],
+          // size: { field: 'grind_size', type: 'q' },
+          // detail: [
+          //   {
+          //     field: 'note',
+          //     type: 'nominal',
+          //   },
+          //   {
+          //     field: 'batch_size_oz',
+          //     type: 'quantitative',
+          //   },
+          //   {
+          //     field: 'rating',
+          //     type: 'quantitative',
+          //   },
+          // ],
         },
       };
     },
