@@ -3,7 +3,7 @@
     <n-link class="link" to="/">Home</n-link>
     <n-link class="link" to="/add">Add a note</n-link>
     <n-link class="link" to="/vega-try">Visualization</n-link>
-    <n-link class="link" to="/debug">Debug</n-link>
+    <n-link class="link debug" to="/debug">Debug</n-link>
   </div>
 </template>
 
@@ -19,6 +19,9 @@
   box-shadow: 5px 5px 5px #222;
   &.nuxt-link-exact-active {
     @apply bg-blue-300;
+  }
+  &.debug {
+    @apply bg-purple-300;
   }
 }
 .links {
