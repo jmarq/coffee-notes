@@ -20,7 +20,8 @@
     "vega": "^5.18.0",
     "vega-embed": "^6.15.0",
     "vega-lite": "^4.17.0",
-    "vuelidate": "^0.7.6"
+    "vuelidate": "^0.7.6",
+    "vuex-orm-localforage": "^0.3.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",

@@ -55,16 +55,20 @@ export default {
     },
     addCoolNote(payload) {
       // add to vuex-orm store
-      Batch.insert({
+      // perhaps call $create here instead to trigger localforage persist
+      Batch.$create({
         data: payload,
       }).then((result) => {
-        const createdId = result.batches[0].id;
-        console.log(result.batches[0].id);
-        console.log('attempting to call this.saveEntities from add.vue');
-        this.saveEntities();
-        this.$router.push({ path: '/', query: { newId: createdId } });
+        console.log({ result });
+        // with vuex-orm-localforage $create, this might only need to do the router push.
+        // result is an array when using localforage create
+        // array might contain a bean or a batch depending on the creation
+        // pick the result that has a "note" or some other batch-specific field?
+        const createdBatch = result.filter(
+          (r) => typeof r.batch_size_oz !== 'undefined'
+        )[0];
+        this.$router.push({ path: '/', query: { newId: createdBatch.id } });
       });
-      // save to localstorage (this probably should not be a mutation, rather a helper/plugin?)
     },
   },
 };

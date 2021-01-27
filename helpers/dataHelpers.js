@@ -13,19 +13,19 @@ export const allBatches = () => {
 };
 
 export const deleteBatch = (batchId) => {
-  return Batch.delete(batchId);
+  return Batch.$delete(batchId);
 };
 
 export const deleteBean = (beanId) => {
-  return Bean.delete(beanId);
+  return Bean.$delete(beanId);
 };
 
 export const deleteAllFakeBatches = () => {
-  return Batch.delete((batch) => batch.id.includes(MOCK_FLAG));
+  return Batch.$delete((batch) => batch.id.includes(MOCK_FLAG));
 };
 
 export const deleteAllFakeBeans = () => {
-  return Bean.delete((bean) => bean.id.includes(MOCK_FLAG));
+  return Bean.$delete((bean) => bean.id.includes(MOCK_FLAG));
 };
 
 export const deleteAllFakeData = () => {
@@ -54,7 +54,7 @@ export const addFakeBeans = (numBeans) => {
     resultIds.push(newBean.id);
     recordsToAdd.push(newBean);
   }
-  Bean.insert({
+  Bean.$create({
     data: recordsToAdd,
   });
   return resultIds;
@@ -69,7 +69,7 @@ export const addFakeBatches = (numBatches, beanIds) => {
     resultIds.push(newBatch.id);
     recordsToAdd.push(newBatch);
   }
-  Batch.insert({
+  Batch.$create({
     data: recordsToAdd,
   });
   return resultIds;
