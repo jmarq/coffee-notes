@@ -90,5 +90,5 @@ sw.*
 *.swp
 
 # cypress artifacts
-cypress/videos
-cypress/screenshots
+cypress/videos/*
+cypress/screenshots/*
