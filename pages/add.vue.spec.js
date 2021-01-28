@@ -4,19 +4,17 @@ import Vuex from 'vuex';
 import Vuelidate from 'vuelidate';
 
 import VuexORM from '@vuex-orm/core';
+import VuexORMLocalForage from 'vuex-orm-localforage';
 import database from '@/database';
 
 import flushPromises from 'flush-promises';
-// import VueRouter from 'vue-router';
-// import Batch from '@/models/Batch';
+import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
-
-// jest.mock('@/models/Batch');
-// jest.mock('@/models/Bean');
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
+VuexORM.use(VuexORMLocalForage, { database });
 localVue.use(Vuelidate);
 
 const mockRouter = {
@@ -50,7 +48,7 @@ describe('add page', () => {
       mutations,
       plugins,
     });
-
+    jest.spyOn(Batch, '$create');
     await Bean.insert({
       data: { name: 'testBean', roast_profile: 'medium' },
     });
@@ -64,8 +62,6 @@ describe('add page', () => {
     const wrapper = mount(AddPage, { store, localVue });
     const theButton = wrapper.find('.coffee-button');
     expect(theButton.exists()).toEqual(false);
-    // await theButton.trigger('click');
-    // expect(actions.addNoteAndSave).not.toHaveBeenCalled();
   });
 
   // lol break this up.
@@ -77,16 +73,12 @@ describe('add page', () => {
         $router: mockRouter,
       },
     });
-    // const theInput = wrapper.find('input');
-    // const newNoteValue = 'here is a note';
-    // theInput.setValue(newNoteValue);
 
     const invalidWarning = wrapper.find('.invalid-warning');
     expect(invalidWarning.exists()).toEqual(true);
 
     const beanSelect = wrapper.find('select#bean-select');
     expect(beanSelect.exists()).toEqual(true);
-    // await beanSelect.setValue('beanId1');
     const options = beanSelect.findAll('option');
     await options.at(1).setSelected();
     await beanSelect.trigger('change');
@@ -100,7 +92,7 @@ describe('add page', () => {
     await theButton.trigger('click');
     await flushPromises();
 
-    expect(actions.saveEntities).toHaveBeenCalled();
+    expect(Batch.$create).toHaveBeenCalled();
     expect(mockRouter.push).toHaveBeenCalled();
   });
 });

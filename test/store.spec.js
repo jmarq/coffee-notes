@@ -2,21 +2,12 @@
 import Vuex from 'vuex';
 import { createLocalVue } from '@vue/test-utils';
 
-// so this seems to let tests pass, but the import after the mock breaks my linting.
-//  is there a preferred solution to this problem?
 // hmm https://stackoverflow.com/questions/45006254/jest-mock-module-per-test
 //  more https://stackoverflow.com/questions/48790927/how-to-change-mock-implementation-on-a-per-single-test-basis-jestjs/54361996#54361996
-import {
-  loadEntitiesFromLocalStorage,
-  // saveEntitiesToLocalStorage,
-  // saveNotesToLocalStorage,
-  // loadNotesFromLocalStorage,
-} from '../helpers/localstorageHelpers.js';
-
+import Batch from '@/models/Batch';
 import { isBrowser } from '../helpers/browserHelpers.js';
 
 jest.mock('../helpers/browserHelpers.js');
-jest.mock('../helpers/localstorageHelpers.js');
 
 describe('store test exploration', () => {
   // making a local vue rather than global
@@ -32,6 +23,8 @@ describe('store test exploration', () => {
     const storePath = `${process.env.buildDir}/store.js`;
     // import it so we can use it in our tests
     NuxtStore = await import(storePath);
+    // the $fetch spy can't happen until after the store has been configured with localforage plugin
+    jest.spyOn(Batch, '$fetch');
   });
 
   beforeEach(async () => {
@@ -53,20 +46,19 @@ describe('store test exploration', () => {
     store.commit('markInitialLoadIncomplete');
     await store.dispatch('performInitialLoad');
     expect(store.state.initialLoadComplete).toBe(true);
-    expect(loadEntitiesFromLocalStorage).toHaveBeenCalled();
+    expect(Batch.$fetch).toHaveBeenCalled();
   });
 
   it('will not perform initial load if it is already marked as done', async () => {
-    // loadNotesFromLocalStorage.mockClear();
     store.commit('markInitialLoadComplete');
     await store.dispatch('performInitialLoad');
-    expect(loadEntitiesFromLocalStorage).not.toHaveBeenCalled();
+    expect(Batch.$fetch).not.toHaveBeenCalled();
   });
 
   it('doesnt try loading from localstorage if not in browser', async () => {
     isBrowser.mockImplementation(() => false);
     store.commit('markInitialLoadIncomplete');
     await store.dispatch('performInitialLoad');
-    expect(loadEntitiesFromLocalStorage).not.toHaveBeenCalled();
+    expect(Batch.$fetch).not.toHaveBeenCalled();
   });
 });

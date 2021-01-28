@@ -41,9 +41,11 @@ const config = Object.assign({}, nuxtConfig, resetConfig, {
   ignore: ['**/components/**/*', '**/layouts/**/*', '**/pages/**/*'],
 });
 
-const buildNuxt = async () => {
+const buildNuxt = () => {
   const nuxt = new Nuxt(config);
-  await new Builder(nuxt).build();
+  // commented this out because it was breaking the dev server when it ran during tests.
+  // unsure of its implications, as I copied this from a blog post trying to get a "real" store in place.
+  // await new Builder(nuxt).build();
   return nuxt;
 };
 

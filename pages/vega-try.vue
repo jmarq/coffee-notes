@@ -14,7 +14,7 @@
       </option>
     </select>
     <div id="chart-container">
-      <div id="chart"></div>
+      <div id="chart" ref="chart"></div>
     </div>
   </div>
 </template>
@@ -157,7 +157,7 @@ export default {
   methods: {
     drawChart() {
       const that = this;
-      vegaEmbed('#chart', this.vegaLiteSpec, {
+      vegaEmbed(this.$refs.chart, this.vegaLiteSpec, {
         tooltip: { theme: 'dark' },
         actions: false,
         renderer: 'svg',

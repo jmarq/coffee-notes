@@ -7,6 +7,7 @@ import Vuex from 'vuex';
 // import Vuelidate from 'vuelidate';
 
 import VuexORM from '@vuex-orm/core';
+import VuexORMLocalForage from 'vuex-orm-localforage';
 import database from '@/database';
 
 import flushPromises from 'flush-promises';
@@ -20,6 +21,7 @@ import Bean from '@/models/Bean';
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
+VuexORM.use(VuexORMLocalForage, { database });
 // localVue.use(Vuelidate);
 
 describe('vega page', () => {
@@ -63,9 +65,7 @@ describe('vega page', () => {
     await addFakeBatches(15, beanIds);
     await flushPromises();
     expect(wrapper.vm).toBeTruthy();
-    // this fails because it can't seem to find the #chart element.
-    // hmmm...wonder why?
-    // const svg = wrapper.find('svg');
-    // expect(svg.exists()).toBeTruthy();
+    expect(wrapper.find('svg').exists()).toBeTruthy();
+    // expect(wrapper.findAll('circle').exists()).toBeTruthy();
   });
 });

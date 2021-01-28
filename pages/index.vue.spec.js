@@ -1,19 +1,14 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Index from '@/pages/index.vue';
 import Vuex from 'vuex';
-
 import VuexORM from '@vuex-orm/core';
+import VuexORMLocalForage from 'vuex-orm-localforage';
 import database from '@/database';
-
-// import Batch from '@/models/Batch';
-// import Bean from '@/models/Bean';
-
-// jest.mock('@/models/Batch');
-// jest.mock('@/models/Bean');
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
+VuexORM.use(VuexORMLocalForage, { database });
 
 const mockRoute = {
   query: {
@@ -42,28 +37,6 @@ describe('index page', () => {
       mutations,
       plugins,
     });
-    // big dumb mock, let's refactor this code into a helper method
-    // Batch.query = jest.fn(() => {
-    //   return {
-    //     with: () => {
-    //       return {
-    //         get: () => {
-    //           return [
-    //             {
-    //               bean: {
-    //                 id: 'fakeId',
-    //                 name: 'fakeBean',
-    //                 roastProfile: 'medium',
-    //               },
-    //               note: 'was good',
-    //               date: Date.now(),
-    //             },
-    //           ];
-    //         },
-    //       };
-    //     },
-    //   };
-    // });
   });
 
   it('is a Vue instance', () => {
