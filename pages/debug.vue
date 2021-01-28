@@ -2,7 +2,7 @@
   <div class="debug-wrapper">
     <h1 class="title">debug tools</h1>
 
-    <button @click="addFakeData" class="coffee-button">
+    <button data-cy="add-data" @click="addFakeData" class="coffee-button">
       add some fake data
     </button>
 
