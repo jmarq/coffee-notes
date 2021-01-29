@@ -20,4 +20,5 @@ module.exports = {
     '<rootDir>/helpers/**/*',
     '<rootDir>/models/**/*',
   ],
+  testPathIgnorePatterns: ['<rootDir>/cypress/'],
 };

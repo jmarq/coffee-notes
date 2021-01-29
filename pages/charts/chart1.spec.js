@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import Charts from '@/pages/charts.vue';
+import Chart1 from '@/pages/charts/chart1.vue';
 import { addFakeBatches, addFakeBeans } from '@/helpers/dataHelpers';
 
 import Vuex from 'vuex';
@@ -20,24 +20,13 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 VuexORM.use(VuexORMLocalForage, { database });
 
-describe('charts page', () => {
+describe('charts chart1 page', () => {
   let actions, state, mutations, plugins, beanIds;
   let store;
   beforeEach(async () => {
-    actions = {
-      saveNotes: jest.fn(),
-      loadNotes: jest.fn(),
-      addNoteAndSave: jest.fn(),
-      saveEntities: jest.fn(() => {
-        console.log('in mock saveEntities');
-      }),
-    };
-    state = {
-      notes: ['yes', 'no', 'villain'],
-    };
-    mutations = {
-      addNote: jest.fn(),
-    };
+    actions = {};
+    state = {};
+    mutations = {};
 
     plugins = [VuexORM.install(database)];
 
@@ -56,7 +45,7 @@ describe('charts page', () => {
     });
   });
   it('renders without choking', async () => {
-    const wrapper = mount(Charts, { store, localVue });
+    const wrapper = mount(Chart1, { store, localVue });
     await flushPromises();
     expect(wrapper.vm).toBeTruthy();
     expect(wrapper.find('svg').exists()).toBeTruthy();
