@@ -1,7 +1,7 @@
 <template>
   <div class="chart-page-wrapper">
     <n-link class="link" to="/charts/chart1">chart 1</n-link>
-    <div class="title">vega index placeholder</div>
+    <div class="title">Scatter Plot</div>
     <label for="x-axis">X Axis</label>
     <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
       <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
@@ -176,8 +176,8 @@ export default {
 
 <style lang="scss">
 /* this style section isn't `scoped` because it targets the vega-created element */
-.vega-wrapper canvas,
-.vega-wrapper svg {
+.charts-wrapper canvas,
+.charts-wrapper svg {
   @apply border-2;
   @apply border-green-400;
   @apply bg-orange-200;

@@ -1,6 +1,5 @@
 <template>
-  <div class="vega-wrapper">
-    <h1 class="title">vega charts?</h1>
+  <div class="charts-wrapper">
     <NuxtChild />
   </div>
 </template>
