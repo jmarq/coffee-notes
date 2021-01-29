@@ -2,7 +2,7 @@
   <div class="links">
     <n-link class="link" to="/">Home</n-link>
     <n-link class="link" to="/add">Add a note</n-link>
-    <n-link class="link" to="/vega-try">Visualization</n-link>
+    <n-link class="link" to="/charts">Charts</n-link>
     <n-link class="link debug" to="/debug">Debug</n-link>
   </div>
 </template>

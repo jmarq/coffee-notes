@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import VegaTry from '@/pages/vega-try.vue';
+import Charts from '@/pages/charts.vue';
 import { addFakeBatches, addFakeBeans } from '@/helpers/dataHelpers';
 
 import Vuex from 'vuex';
@@ -20,7 +20,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 VuexORM.use(VuexORMLocalForage, { database });
 
-describe('vega page', () => {
+describe('charts page', () => {
   let actions, state, mutations, plugins, beanIds;
   let store;
   beforeEach(async () => {
@@ -56,7 +56,7 @@ describe('vega page', () => {
     });
   });
   it('renders without choking', async () => {
-    const wrapper = mount(VegaTry, { store, localVue });
+    const wrapper = mount(Charts, { store, localVue });
     await flushPromises();
     expect(wrapper.vm).toBeTruthy();
     expect(wrapper.find('svg').exists()).toBeTruthy();

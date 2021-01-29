@@ -1,6 +1,8 @@
 <template>
   <div class="vega-wrapper">
     <h1 class="title">vega charts?</h1>
+    <NuxtChild />
+    <!-- move the chart code into index/other_chart nested pages, so we can have multiple chart pages under this charts route -->
     <label for="x-axis">X Axis</label>
     <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
       <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
