@@ -21,8 +21,15 @@
 </template>
 
 <script>
-import vegaEmbed from 'vega-embed';
+import vegaEmbed, { vega } from 'vega-embed';
 import Batch from '@/models/Batch';
+import Bean from '@/models/Bean';
+
+vega.expressionFunction('hello', function (datum, params, etc) {
+  // this is probably too inefficient once we have a lot of beans
+  const theBean = Bean.find(datum);
+  return theBean.name;
+});
 
 const axisConfigs = {
   date: {
@@ -55,6 +62,14 @@ const axisConfigs = {
     field: 'bean.id',
     type: 'nominal',
     title: 'bean',
+    axis: {
+      // labelExpr: 'datum.label',
+      // was trying to use the parent datum in the formatting but that seems to be tricky
+      // I mean, we could look up the bean by its id again just to get its name, but that seems like a lot...
+      format: 'bean.name',
+      formatType: 'hello',
+      labelAngle: -65,
+    },
   },
 };
 
@@ -81,11 +96,16 @@ export default {
         $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
         description: 'A simple bar chart with embedded data.',
         config: {
+          customFormatTypes: true,
           background: '#eee',
           padding: 10,
           axis: {
             labelFontSize: 16,
             titleFontSize: 24,
+          },
+          axisX: {
+            labelAngle: -65,
+            tickSize: 10,
           },
           legend: {
             labelFontSize: 16,
