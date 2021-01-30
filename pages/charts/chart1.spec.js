@@ -49,6 +49,8 @@ describe('charts chart1 page', () => {
     await flushPromises();
     expect(wrapper.vm).toBeTruthy();
     expect(wrapper.find('svg').exists()).toBeTruthy();
-    expect(wrapper.findAll('path[aria-roledescription="bar"]').length).toBe(15);
+    expect(wrapper.findAll('path[aria-roledescription="bar"]').exists()).toBe(
+      true
+    );
   });
 });
