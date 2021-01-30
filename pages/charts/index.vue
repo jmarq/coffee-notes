@@ -2,18 +2,20 @@
   <div class="chart-page-wrapper">
     <n-link class="link" to="/charts/chart1">chart 1</n-link>
     <div class="title">Scatter Plot</div>
-    <label for="x-axis">X Axis</label>
-    <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
-      <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
-        {{ pair[1].title }}
-      </option>
-    </select>
-    <label for="y-axis">Y Axis</label>
-    <select id="y-axis" v-model="yAxisAttribute" name="y-axis">
-      <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
-        {{ pair[1].title }}
-      </option>
-    </select>
+    <div class="axis-selectors-wrapper">
+      <label for="x-axis">X Axis</label>
+      <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
+        <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
+          {{ pair[1].title }}
+        </option>
+      </select>
+      <label for="y-axis">Y Axis</label>
+      <select id="y-axis" v-model="yAxisAttribute" name="y-axis">
+        <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
+          {{ pair[1].title }}
+        </option>
+      </select>
+    </div>
     <div id="chart-container">
       <div id="chart" ref="chart"></div>
     </div>
