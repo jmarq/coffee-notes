@@ -2,7 +2,7 @@
   <div class="links">
     <n-link class="link" to="/">Home</n-link>
     <n-link class="link" to="/add">Add a note</n-link>
-    <n-link class="link" to="/charts">Charts</n-link>
+    <n-link class="link inexact" to="/charts">Charts</n-link>
     <n-link class="link debug" to="/debug">Debug</n-link>
   </div>
 </template>
@@ -17,7 +17,8 @@
   @apply mb-2;
   @apply inline-block;
   box-shadow: 5px 5px 5px #222;
-  &.nuxt-link-exact-active {
+  &.nuxt-link-exact-active,
+  &.inexact.nuxt-link-active {
     @apply bg-blue-300;
   }
   &.debug {

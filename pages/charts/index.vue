@@ -1,23 +1,25 @@
 <template>
   <div class="chart-page-wrapper">
-    <n-link class="link" to="/charts/chart1">chart 1</n-link>
-    <div class="title">Scatter Plot</div>
-    <div class="axis-selectors-wrapper">
-      <label for="x-axis">X Axis</label>
-      <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
-        <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
-          {{ pair[1].title }}
-        </option>
-      </select>
-      <label for="y-axis">Y Axis</label>
+    <div class="chart-nav">
+      <n-link class="link" to="/charts">Batches</n-link>
+      <n-link class="link" to="/charts/chart1">Beans</n-link>
+    </div>
+    <div class="axis-selectors-wrapper y">
+      <label for="y-axis">Y Axis:</label>
       <select id="y-axis" v-model="yAxisAttribute" name="y-axis">
         <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
           {{ pair[1].title }}
         </option>
       </select>
     </div>
-    <div id="chart-container">
-      <div id="chart" ref="chart"></div>
+    <div id="chart" ref="chart"></div>
+    <div class="axis-selectors-wrapper x">
+      <label for="x-axis">X Axis:</label>
+      <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
+        <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
+          {{ pair[1].title }}
+        </option>
+      </select>
     </div>
   </div>
 </template>
@@ -197,15 +199,10 @@ export default {
 
 <style lang="scss">
 /* this style section isn't `scoped` because it targets the vega-created element */
-.charts-wrapper canvas,
-.charts-wrapper svg {
-  @apply border-2;
-  @apply border-green-400;
-  @apply bg-orange-200;
-}
 #chart {
   width: 100%;
   height: 700px;
+  display: block;
 }
 #vg-tooltip-element {
   font-size: 16px;
@@ -221,8 +218,4 @@ export default {
     text-align: right !important;
   }
 }
-/* there has to be a better way */
-/* #chart text {
-  font-size: 16px;
-} */
 </style>
