@@ -46,7 +46,6 @@ import { numeric, required } from 'vuelidate/lib/validators';
 import BeanForm from './BeanForm';
 import BeanSelector from './BeanSelector';
 const customBeanIdValidator = (value, vm) => {
-  // return true;
   if (vm.bean || value) {
     return true;
   } else {
@@ -56,12 +55,10 @@ const customBeanIdValidator = (value, vm) => {
 };
 
 const customBeanValidator = (value, vm) => {
-  // return true;
   if (vm.bean_id || (value && value.name && value.roast_profile)) {
     return true;
   } else {
     console.log('invalid bean');
-
     return false;
   }
 };
@@ -87,13 +84,7 @@ export default {
     grinds_oz: { numeric },
     rating: { numeric },
   },
-  computed: {
-    validBatch() {
-      return true;
-      // this.$v.$touch();
-      // return this.$v.invalid;
-    },
-  },
+
   methods: {
     updateBean(bean) {
       this.bean = bean;

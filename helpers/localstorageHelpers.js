@@ -4,10 +4,6 @@ export const LOCALSTORAGE_KEY = 'coffeeNotes';
 
 export const LOCALSTORAGE_ENTITIES_KEY = 'coffeeNoteEntities';
 
-// export const isBrowser = () => {
-//   return Boolean(process.browser);
-// };
-
 export const saveEntitiesToLocalStorage = (entities) => {
   const stringified = JSON.stringify(entities);
   if (isBrowser()) {

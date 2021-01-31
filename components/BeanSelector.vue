@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import Bean from '@/models/Bean';
 import { allBeans } from '@/helpers/dataHelpers';
 import SelectedBean from './SelectedBean';
 

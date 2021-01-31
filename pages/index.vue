@@ -31,7 +31,6 @@
 </template>
 
 <script>
-// import Batch from '@/models/Batch';
 import { allBatches } from '@/helpers/dataHelpers';
 export default {
   computed: {

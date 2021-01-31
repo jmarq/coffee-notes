@@ -4,21 +4,10 @@
       enter bean details here!!
       <form @submit.prevent>
         <label for="bean-name" required>Bean Name</label>
-        <input
-          id="bean-name"
-          v-model="newBean.name"
-          type="text"
-          required
-          @keypress="formChange"
-        />
+        <input id="bean-name" v-model="newBean.name" type="text" required />
         <label for="roast-profile" required>Roast Profile</label>
 
-        <select
-          id="roast-profile"
-          v-model="newBean.roast_profile"
-          required
-          @change="formChange"
-        >
+        <select id="roast-profile" v-model="newBean.roast_profile" required>
           <option
             v-for="profile in roastProfileOptions"
             :key="profile"
@@ -42,7 +31,6 @@ export default {
   props: { show: Boolean },
   data() {
     return {
-      // maybe there should be a watcher on newBean that sends the $emit?
       newBean: {
         name: '',
         roast_profile: 'Medium',
@@ -54,14 +42,6 @@ export default {
     newBean: {
       name: { required, minLength: minLength(1) },
       roast_profile: { required },
-    },
-  },
-  methods: {
-    formChange(ev) {
-      // console.log('invalid?');
-      // console.log(this.$v.$invalid);
-      console.log('the form changed?');
-      // this.$emit('beanChange', this.newBean);
     },
   },
   watch: {
@@ -88,7 +68,6 @@ export default {
 .bean-form-wrapper {
   @apply border;
   @apply border-purple-700;
-  /* max-height: 130px; */
   overflow: hidden;
   transform-origin: top left;
 }

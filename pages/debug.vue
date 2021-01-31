@@ -54,8 +54,6 @@ import {
   addFakeBatches,
   allBeans,
   allBatches,
-  // allFakeBeans,
-  // allFakeBatches,
   deleteBatch,
   deleteBean,
   deleteAllFakeData,
