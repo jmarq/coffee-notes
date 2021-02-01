@@ -31,7 +31,7 @@ import vegaEmbed, { vega } from 'vega-embed';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 
-vega.expressionFunction('hello', function (datum, params, etc) {
+vega.expressionFunction('hello', function (datum, params) {
   // this is probably too inefficient once we have a lot of beans
   const theBean = Bean.find(datum);
   return theBean.name;
