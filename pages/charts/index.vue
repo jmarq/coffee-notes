@@ -4,28 +4,23 @@
       <n-link class="link" to="/charts">Batches</n-link>
       <n-link class="link" to="/charts/chart1">Beans</n-link>
     </div>
-    <div class="axis-selectors-wrapper y">
-      <label for="y-axis">Y Axis:</label>
-      <select id="y-axis" v-model="yAxisAttribute" name="y-axis">
-        <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
-          {{ pair[1].title }}
-        </option>
-      </select>
-    </div>
+    <axis-selector
+      v-model="yAxisAttribute"
+      axis="y"
+      :axis-options="axisOptions"
+    ></axis-selector>
     <div id="chart" ref="chart"></div>
-    <div class="axis-selectors-wrapper x">
-      <label for="x-axis">X Axis:</label>
-      <select id="x-axis" v-model="xAxisAttribute" name="x-axis">
-        <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
-          {{ pair[1].title }}
-        </option>
-      </select>
-    </div>
+    <axis-selector
+      v-model="xAxisAttribute"
+      axis="x"
+      :axis-options="axisOptions"
+    ></axis-selector>
   </div>
 </template>
 
 <script>
 import vegaEmbed, { vega } from 'vega-embed';
+import AxisSelector from '@/components/charts/AxisSelector';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 
@@ -78,6 +73,9 @@ const axisConfigs = {
 };
 
 export default {
+  components: {
+    AxisSelector,
+  },
   data() {
     return {
       chart: undefined,
