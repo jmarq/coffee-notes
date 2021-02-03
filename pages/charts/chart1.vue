@@ -24,6 +24,7 @@ import vegaEmbed, { vega } from 'vega-embed';
 import AxisSelector from '@/components/charts/AxisSelector';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
+import beanBar from '@/helpers/vegaSpecs/beanBar';
 
 vega.expressionFunction('hello', function (datum, params) {
   // this is probably too inefficient once we have a lot of beans
@@ -97,49 +98,15 @@ export default {
     vegaLiteSpec() {
       // probably break this into a separate file to import/reuse
       // it is kind of chunky to be eating up so much editor space in this page file.
-      return {
-        $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
-        description: 'A simple bar chart with embedded data.',
-        config: {
-          customFormatTypes: true,
-          background: '#eee',
-          padding: 10,
-          axis: {
-            labelFontSize: 16,
-            titleFontSize: 24,
-          },
-          axisX: {
-            labelAngle: -65,
-            tickSize: 10,
-          },
-          legend: {
-            labelFontSize: 16,
-            titleFontSize: 24,
-          },
-        },
-        data: {
-          values: this.chartData,
-        },
-        width: 'container',
-        height: 'container',
-        mark: {
-          type: 'bar',
-          tooltip: true,
-        },
-        encoding: {
-          x: axisConfigs[this.xAxisAttribute],
-          y: axisConfigs[this.yAxisAttribute],
-          color: {
-            title: 'roast',
-            field: 'bean.roast_profile',
-            type: 'nominal',
-            scale: {
-              domain: ['Dark', 'Medium', 'Light'],
-              range: ['#210', '#642', '#b94'],
-            },
-          },
-        },
+      const result = {
+        ...beanBar,
       };
+      result.data = {
+        values: this.chartData,
+      };
+      result.encoding.x = axisConfigs[this.xAxisAttribute];
+      result.encoding.y = axisConfigs[this.yAxisAttribute];
+      return result;
     },
   },
   watch: {

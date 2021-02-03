@@ -23,6 +23,7 @@ import vegaEmbed, { vega } from 'vega-embed';
 import AxisSelector from '@/components/charts/AxisSelector';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
+import batchScatter from '@/helpers/vegaSpecs/batchScatter';
 
 vega.expressionFunction('hello', function (datum, params) {
   // this is probably too inefficient once we have a lot of beans
@@ -94,66 +95,15 @@ export default {
         .filter((batch) => batch.rating);
     },
     vegaLiteSpec() {
-      return {
-        $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
-        description: 'A simple bar chart with embedded data.',
-        config: {
-          customFormatTypes: true,
-          background: '#eee',
-          padding: 10,
-          axis: {
-            labelFontSize: 16,
-            titleFontSize: 24,
-          },
-          legend: {
-            labelFontSize: 16,
-            titleFontSize: 24,
-          },
-        },
-        data: {
-          values: this.chartData,
-        },
-        width: 'container',
-        height: 'container',
-        mark: {
-          type: 'circle',
-          tooltip: true,
-        },
-        encoding: {
-          // maybe allow the user to change these encodings via ui inputs
-          // x: {
-          //   field: this.xAxisAttribute,
-          //   type: axisConfigs[this.xAxisAttribute].type,
-          //   title: axisConfigs[this.xAxisAttribute].title,
-          // },
-          x: axisConfigs[this.xAxisAttribute],
-          y: axisConfigs[this.yAxisAttribute],
-          color: {
-            title: 'roast',
-            field: 'bean.roast_profile',
-            type: 'nominal',
-            scale: {
-              domain: ['Dark', 'Medium', 'Light'],
-              range: ['#210', '#642', '#b94'],
-            },
-          },
-          size: { field: 'grind_size', type: 'q' },
-          detail: [
-            {
-              field: 'note',
-              type: 'nominal',
-            },
-            {
-              field: 'batch_size_oz',
-              type: 'quantitative',
-            },
-            {
-              field: 'rating',
-              type: 'quantitative',
-            },
-          ],
-        },
+      const result = {
+        ...batchScatter,
       };
+      result.data = {
+        values: this.chartData,
+      };
+      result.encoding.x = axisConfigs[this.xAxisAttribute];
+      result.encoding.y = axisConfigs[this.yAxisAttribute];
+      return result;
     },
   },
   watch: {
