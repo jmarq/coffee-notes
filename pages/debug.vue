@@ -1,14 +1,19 @@
 <template>
   <div class="debug-wrapper">
     <h1 class="title">debug tools</h1>
+    <div class="debug-buttons">
+      <button
+        data-cy="add-data"
+        class="coffee-button mx-2"
+        @click="addFakeData"
+      >
+        add some fake data
+      </button>
 
-    <button data-cy="add-data" @click="addFakeData" class="coffee-button">
-      add some fake data
-    </button>
-
-    <button @click="deleteAllFakeData" class="coffee-button">
-      delete all fake data
-    </button>
+      <button class="coffee-button mx-2" @click="deleteAllFakeData">
+        delete all fake data
+      </button>
+    </div>
 
     <h2 class="text-xl font-bold">batches:</h2>
     <ul>
@@ -97,5 +102,9 @@ export default {
   @apply bg-opacity-75;
   @apply p-2;
   @apply rounded-md;
+}
+.debug-buttons {
+  display: flex;
+  justify-content: center;
 }
 </style>

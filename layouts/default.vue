@@ -47,10 +47,22 @@ html {
 }
 
 .coffee-button {
+  @screen md {
+    @apply p-4;
+    @apply py-2;
+  }
+  @screen lg {
+    @apply p-6;
+    @apply py-4;
+  }
+  @screen xl {
+    @apply p-8;
+    @apply py-6;
+  }
   @apply bg-orange-900;
   @apply text-green-300;
   @apply font-bold;
-  @apply p-8;
+  @apply p-2;
   @apply rounded-md;
 }
 
@@ -66,7 +78,16 @@ html {
 }
 
 .title {
-  @apply text-6xl;
+  @screen md {
+    @apply text-3xl;
+  }
+  @screen lg {
+    @apply text-4xl;
+  }
+  @screen xl {
+    @apply text-6xl;
+  }
+  @apply text-2xl;
   @apply italic;
   @apply font-bold;
   @apply text-green-200;

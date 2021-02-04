@@ -9,12 +9,19 @@
 
 <style scoped lang="scss">
 .link {
-  @apply text-3xl;
+  @screen md {
+    @apply text-xl;
+    @apply p-2;
+  }
+  @screen xl {
+    @apply text-3xl;
+  }
+  @apply text-base;
+  @apply p-1;
+  @apply mb-2;
   @apply bg-yellow-300;
-  @apply p-2;
   @apply text-purple-900;
   @apply rounded-md;
-  @apply mb-2;
   @apply inline-block;
   box-shadow: 5px 5px 5px #222;
   &.nuxt-link-exact-active,

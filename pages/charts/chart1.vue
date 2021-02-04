@@ -147,23 +147,24 @@ export default {
 
 <style lang="scss">
 /* this style section isn't `scoped` because it targets the vega-created element */
-
+// look into "deep selectors" in vue as a potential solution for this.
 #chart {
   width: 100%;
+  min-width: 600px;
   height: 700px;
   display: block;
 }
 #vg-tooltip-element {
-  font-size: 16px;
+  font-size: 12px;
   tr {
     border-bottom: 1px solid #aaa !important;
   }
   td.key {
     color: rgba(4, 251, 57, 0.952) !important;
-    font-size: 1.5em;
+    // font-size: 1.5em;
   }
   td.value {
-    font-size: 1.5em;
+    // font-size: 1.5em;
     text-align: right !important;
   }
 }
