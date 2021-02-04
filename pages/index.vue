@@ -10,17 +10,7 @@
           loading="lazy"
         />
       </section> -->
-      <section class="recent-batch">
-        <div v-if="mostRecent" class="recent-batch-info">
-          <h2 class="font-bold text-xl">Previous batch</h2>
-          <p>Bean: {{ mostRecent.bean.name }}</p>
-          <p>Grind Size: {{ mostRecent.grind_size }}</p>
-          <p>Batch Size: {{ mostRecent.batch_size_oz }} oz.</p>
-          <p>Rating: {{ mostRecent.rating }}</p>
-          <p>Note: {{ mostRecent.note }}</p>
-        </div>
-        <div v-else class="recent-batch-empty">no recent batches</div>
-      </section>
+      <latest-batch></latest-batch>
 
       <div class="coffee">
         <h1 v-if="!batches.length" class="title">no notes yet</h1>
@@ -43,7 +33,9 @@
 
 <script>
 import { allBatches, mostRecentBatch } from '@/helpers/dataHelpers';
+import LatestBatch from '@/components/LatestBatch.vue';
 export default {
+  components: { LatestBatch },
   computed: {
     batches: () => {
       return allBatches();
@@ -67,7 +59,7 @@ body {
 
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .header-image {
@@ -94,7 +86,7 @@ body {
   @apply border-indigo-600;
   @apply border;
   @apply overflow-y-auto;
-  max-height: 400px;
+  max-height: 600px;
 }
 
 .coffee li {
@@ -117,10 +109,5 @@ body {
   to {
     @apply bg-orange-300;
   }
-}
-
-.recent-batch {
-  @apply bg-yellow-200;
-  @apply rounded-md;
 }
 </style>
