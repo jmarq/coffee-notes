@@ -1,5 +1,9 @@
 <template>
   <div class="charts-wrapper">
+    <div class="chart-nav">
+      <n-link class="link subpage-link" to="/charts">Batches</n-link>
+      <n-link class="link subpage-link" to="/charts/beans">Beans</n-link>
+    </div>
     <NuxtChild />
   </div>
 </template>
@@ -12,24 +16,7 @@
   @apply bg-orange-200;
 }
 
-.axis-selectors-wrapper {
-  &.x {
-    justify-content: center;
-  }
-  &.y {
-    justify-content: flex-start;
-  }
-  @apply flex;
-  align-items: center;
-  @apply font-bold;
-  background-color: #eee;
-  select {
-    @apply ml-2;
-    @apply p-2;
-  }
-}
-
-.link {
+.subpage-link {
   @apply px-2;
   @apply py-1;
   @apply mb-1;

@@ -1,9 +1,5 @@
 <template>
   <div class="chart-page-wrapper">
-    <div class="chart-nav">
-      <n-link class="link" to="/charts">Batches</n-link>
-      <n-link class="link" to="/charts/chart1">Beans</n-link>
-    </div>
     <axis-selector
       v-model="yAxisAttribute"
       axis="y"

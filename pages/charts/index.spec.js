@@ -1,5 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import Index from '@/pages/charts/index.vue';
+import IndexChart from '@/pages/charts/index.vue';
 import { addFakeBatches, addFakeBeans } from '@/helpers/dataHelpers';
 
 import Vuex from 'vuex';
@@ -45,7 +45,7 @@ describe('charts index page', () => {
     });
   });
   it('renders without choking', async () => {
-    const wrapper = mount(Index, { store, localVue });
+    const wrapper = mount(IndexChart, { store, localVue });
     await flushPromises();
     expect(wrapper.vm).toBeTruthy();
     expect(wrapper.find('svg').exists()).toBeTruthy();
