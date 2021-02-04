@@ -140,23 +140,4 @@ export default {
 
 <style lang="scss">
 /* this style section isn't `scoped` because it targets the vega-created element */
-#chart {
-  width: 100%;
-  height: 700px;
-  display: block;
-}
-#vg-tooltip-element {
-  font-size: 16px;
-  tr {
-    border-bottom: 1px solid #aaa !important;
-  }
-  td.key {
-    color: rgba(4, 251, 57, 0.952) !important;
-    font-size: 1.5em;
-  }
-  td.value {
-    font-size: 1.5em;
-    text-align: right !important;
-  }
-}
 </style>

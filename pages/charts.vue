@@ -16,15 +16,34 @@
   @apply bg-orange-200;
 }
 
-.subpage-link {
-  @apply px-2;
-  @apply py-1;
-  @apply mb-1;
-  @apply bg-orange-300;
-  @apply rounded-md;
-  @apply inline-block;
-  &.nuxt-link-exact-active {
-    @apply bg-blue-300;
+.chart-page-wrapper {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#chart {
+  width: 100%;
+  min-width: 600px;
+  height: 700px;
+  display: block;
+  overflow-x: auto;
+}
+
+#vg-tooltip-element {
+  font-size: 12px;
+  tr {
+    border-bottom: 1px solid #aaa !important;
+  }
+  td.key {
+    color: rgba(4, 251, 57, 0.952) !important;
+    // font-size: 1.5em;
+  }
+  td.value {
+    // font-size: 1.5em;
+    // text-align: right !important;
   }
 }
 </style>

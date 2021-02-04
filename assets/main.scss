@@ -21,3 +21,16 @@ select:invalid {
   @apply border-2;
   transition: 500ms linear;
 }
+
+
+.subpage-link {
+  @apply px-2;
+  @apply py-1;
+  @apply mb-1;
+  @apply bg-orange-300;
+  @apply rounded-md;
+  @apply inline-block;
+  &.nuxt-link-exact-active {
+    @apply bg-blue-300;
+  }
+}
