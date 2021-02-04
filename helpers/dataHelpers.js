@@ -9,7 +9,11 @@ export const allBeans = () => {
 };
 
 export const allBatches = () => {
-  return Batch.query().with('bean').get();
+  return Batch.query().with('bean').orderBy('date', 'desc').get();
+};
+
+export const mostRecentBatch = () => {
+  return Batch.query().with('bean').orderBy('date', 'desc').first();
 };
 
 export const deleteBatch = (batchId) => {

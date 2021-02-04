@@ -2,15 +2,26 @@
   <div class="container">
     <div>
       <!-- <h1 class="title">coffee-notes</h1> -->
-      <section class="header-image">
+      <!-- <section class="header-image">
         <img
           class="kangaroos"
           src="https://www.darbypop.com/wp-content/uploads/2020/06/Darby-Bites-99-copy.png"
           alt="a hot cup of joseph"
           loading="lazy"
         />
+      </section> -->
+      <section class="recent-batch">
+        <div v-if="mostRecent" class="recent-batch-info">
+          <h2 class="font-bold text-xl">Previous batch</h2>
+          <p>Bean: {{ mostRecent.bean.name }}</p>
+          <p>Grind Size: {{ mostRecent.grind_size }}</p>
+          <p>Batch Size: {{ mostRecent.batch_size_oz }} oz.</p>
+          <p>Rating: {{ mostRecent.rating }}</p>
+          <p>Note: {{ mostRecent.note }}</p>
+        </div>
+        <div v-else class="recent-batch-empty">no recent batches</div>
       </section>
-      <p>{{ createdBatch }} was created?</p>
+
       <div class="coffee">
         <h1 v-if="!batches.length" class="title">no notes yet</h1>
         <ul ref="listo2">
@@ -31,11 +42,14 @@
 </template>
 
 <script>
-import { allBatches } from '@/helpers/dataHelpers';
+import { allBatches, mostRecentBatch } from '@/helpers/dataHelpers';
 export default {
   computed: {
     batches: () => {
       return allBatches();
+    },
+    mostRecent() {
+      return mostRecentBatch();
     },
     createdBatch() {
       console.log(this.$route);
@@ -103,5 +117,10 @@ body {
   to {
     @apply bg-orange-300;
   }
+}
+
+.recent-batch {
+  @apply bg-yellow-200;
+  @apply rounded-md;
 }
 </style>
