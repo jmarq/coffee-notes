@@ -17,6 +17,14 @@ export default {
   data: {
     values: [],
   },
+  selection: {
+    highlight: {
+      type: 'single',
+      empty: 'none',
+      nearest: true,
+      on: 'mouseover',
+    },
+  },
   width: 'container',
   height: 'container',
   mark: {
@@ -31,6 +39,10 @@ export default {
       scale: {
         domain: ['Dark', 'Medium', 'Light'],
         range: ['#210', '#642', '#b94'],
+      },
+      condition: {
+        selection: 'highlight',
+        value: 'yellow',
       },
     },
     size: { field: 'grind_size', type: 'q' },

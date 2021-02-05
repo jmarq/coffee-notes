@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import vegaEmbed, { vega } from 'vega-embed';
 import AxisSelector from '@/components/charts/AxisSelector';
 import Batch from '@/models/Batch';
@@ -84,6 +85,7 @@ export default {
   },
 
   computed: {
+    ...mapState({ windowWidth: 'windowWidth' }),
     chartData() {
       // maybe allow the user to filter the results by date/roast/bean/etc
       return Batch.query()
@@ -102,6 +104,12 @@ export default {
       };
       result.encoding.x = axisConfigs[this.xAxisAttribute];
       result.encoding.y = axisConfigs[this.yAxisAttribute];
+      result.config.legend.direction = 'vertical';
+      if (this.windowWidth < 800) {
+        result.config.legend.orient = 'bottom';
+      } else {
+        result.config.legend.orient = 'right';
+      }
       return result;
     },
   },
@@ -134,6 +142,7 @@ export default {
           // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
           console.log('chart has rendered');
           that.chart = result;
+          console.log(that.chart);
         })
         .catch((err) => console.log(err));
     },

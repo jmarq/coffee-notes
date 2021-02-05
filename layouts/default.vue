@@ -11,7 +11,9 @@ export default {
   components: { MainNav },
   mounted() {
     if (process.browser) {
+      console.log('in browser');
       this.$store.dispatch('performInitialLoad');
+      this.$store.commit('setWindowWidth', window.innerWidth);
     }
   },
 };

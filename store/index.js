@@ -16,6 +16,7 @@ export const plugins = [VuexORM.install(database)];
 export const state = () => {
   return {
     initialLoadComplete: false,
+    windowWidth: 960,
   };
 };
 // MUTATIONS
@@ -26,6 +27,9 @@ export const mutations = {
 
   markInitialLoadIncomplete: (state) => {
     state.initialLoadComplete = false;
+  },
+  setWindowWidth: (state, width) => {
+    state.windowWidth = width;
   },
 };
 // ACTIONS
