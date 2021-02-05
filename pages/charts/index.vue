@@ -21,6 +21,7 @@ import AxisSelector from '@/components/charts/AxisSelector';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 import batchScatter from '@/helpers/vegaSpecs/batchScatter';
+import * as specHelpers from '@/helpers/vegaSpecs/specHelpers';
 
 vega.expressionFunction('hello', function (datum, params) {
   // this is probably too inefficient once we have a lot of beans
@@ -93,7 +94,7 @@ export default {
         .filter((batch) => batch.rating);
     },
     vegaLiteSpec() {
-      const result = {
+      let result = {
         ...batchScatter,
       };
       result.data = {
@@ -101,12 +102,8 @@ export default {
       };
       result.encoding.x = axisConfigs[this.xAxisAttribute];
       result.encoding.y = axisConfigs[this.yAxisAttribute];
-      result.config.legend.direction = 'vertical';
-      if (this.windowWidth < 800) {
-        result.config.legend.orient = 'bottom';
-      } else {
-        result.config.legend.orient = 'right';
-      }
+      result = specHelpers.adjustLegendLayout(result, this.windowWidth);
+      result = specHelpers.adjustFontSizes(result, this.windowWidth);
       return result;
     },
   },

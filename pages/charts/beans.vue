@@ -22,6 +22,7 @@ import AxisSelector from '@/components/charts/AxisSelector';
 import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
 import beanBar from '@/helpers/vegaSpecs/beanBar';
+import * as specHelpers from '@/helpers/vegaSpecs/specHelpers';
 
 vega.expressionFunction('hello', function (datum, params) {
   // this is probably too inefficient once we have a lot of beans
@@ -96,7 +97,7 @@ export default {
     vegaLiteSpec() {
       // probably break this into a separate file to import/reuse
       // it is kind of chunky to be eating up so much editor space in this page file.
-      const result = {
+      let result = {
         ...beanBar,
       };
       result.data = {
@@ -104,12 +105,8 @@ export default {
       };
       result.encoding.x = axisConfigs[this.xAxisAttribute];
       result.encoding.y = axisConfigs[this.yAxisAttribute];
-      result.config.legend.direction = 'vertical';
-      if (this.windowWidth < 800) {
-        result.config.legend.orient = 'bottom';
-      } else {
-        result.config.legend.orient = 'right';
-      }
+      result = specHelpers.adjustLegendLayout(result, this.windowWidth);
+      result = specHelpers.adjustFontSizes(result, this.windowWidth);
       return result;
     },
   },
