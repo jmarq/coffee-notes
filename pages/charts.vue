@@ -52,6 +52,16 @@ export default {
   overflow-x: auto;
 }
 
+.chart-empty {
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  background-image: linear-gradient(0deg, #bed, transparent);
+}
+
 // yeesh this is getting ugly
 // alas, vega-lite tooltips on mobile seem to act a bit erratic
 // sometimes they appear off the screen, unable to be scrolled to
@@ -63,6 +73,7 @@ export default {
   }
 }
 
+// there is a bug where these can stay locked visible if the use uses the browser back button to navigate away from the page
 #vg-tooltip-element,
 #vg-tooltip-element[style] {
   &:not(.visible) {

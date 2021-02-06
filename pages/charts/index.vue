@@ -5,7 +5,9 @@
       axis="y"
       :axis-options="axisOptions"
     ></axis-selector>
-    <div id="chart" ref="chart"></div>
+    <div id="chart" ref="chart">
+      <div v-if="chartData.length === 0" class="chart-empty">no data</div>
+    </div>
     <axis-selector
       v-model="xAxisAttribute"
       axis="x"
@@ -126,6 +128,9 @@ export default {
 
   methods: {
     drawChart() {
+      if (this.chartData.length === 0) {
+        return;
+      }
       const that = this;
       vegaEmbed(this.$refs.chart, this.vegaLiteSpec, {
         tooltip: { theme: 'dark' },
