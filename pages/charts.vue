@@ -59,11 +59,22 @@ export default {
   &.visible {
     pointer-events: none;
   }
+  &:not(.visible) {
+    opacity: 0;
+  }
+}
+
+.mark-symbol {
+  path {
+    transition: 200ms ease-in;
+  }
 }
 
 #vg-tooltip-element,
 #vg-tooltip-element[style] {
-  font-size: 12px;
+  border: none;
+  transition: 300ms ease-in;
+  font-size: 16px;
   top: 0 !important;
   width: 100%;
   left: 0 !important;
@@ -82,11 +93,11 @@ export default {
     border-bottom: 1px solid #aaa !important;
   }
   td.key {
-    color: rgba(4, 251, 57, 0.952) !important;
+    color: #bed;
   }
   td.value {
     display: block;
-    color: red;
+    color: #eee;
   }
 }
 </style>

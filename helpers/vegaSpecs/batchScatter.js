@@ -29,9 +29,18 @@ export default {
   height: 'container',
   mark: {
     type: 'circle',
-    tooltip: true,
   },
   encoding: {
+    tooltip: [
+      { field: 'date', type: 'temporal' },
+      { field: 'bean.name', type: 'nominal' },
+      { field: 'bean.roast_profile', type: 'ordinal' },
+      { field: 'rating', type: 'quantitative' },
+      { field: 'batch_size_oz', type: 'quantitative' },
+      { field: 'grinds_oz', type: 'quantitative' },
+      { field: 'grind_size', type: 'quantitative' },
+      { field: 'note', type: 'nominal' },
+    ],
     color: {
       title: 'roast',
       field: 'bean.roast_profile',
@@ -42,7 +51,7 @@ export default {
       },
       condition: {
         selection: 'highlight',
-        value: 'yellow',
+        value: '#b29',
       },
     },
     size: { field: 'grind_size', type: 'q' },
