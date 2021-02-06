@@ -19,10 +19,10 @@ export const fakeBatch = (beanId) => {
   const id = uuid() + MOCK_FLAG;
   return {
     bean_id: beanId,
-    grind_size: Faker.random.number(),
-    grinds_oz: Faker.random.number(),
-    batch_size_oz: Faker.random.number(),
-    rating: Faker.random.number(),
+    grind_size: Faker.random.number(30),
+    grinds_oz: Faker.random.number(100),
+    batch_size_oz: Faker.random.number(100),
+    rating: Faker.random.number(10),
     note: Faker.company.catchPhrase(),
     date: Faker.date.past().valueOf(),
     id,
