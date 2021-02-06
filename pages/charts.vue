@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
+// rethink these class names, what is the difference between wrapper, page wrapper, chart, etc.
 .charts-wrapper canvas,
 .charts-wrapper svg {
   @apply border-2;
@@ -55,14 +56,6 @@ export default {
 // alas, vega-lite tooltips on mobile seem to act a bit erratic
 // sometimes they appear off the screen, unable to be scrolled to
 // since they contain important info, this is a bandaid
-#vg-tooltip-element {
-  &.visible {
-    pointer-events: none;
-  }
-  &:not(.visible) {
-    opacity: 0;
-  }
-}
 
 .mark-symbol {
   path {
@@ -72,9 +65,16 @@ export default {
 
 #vg-tooltip-element,
 #vg-tooltip-element[style] {
+  &:not(.visible) {
+    // pointer-events: none;
+    opacity: 0;
+  }
   border: none;
   transition: 300ms ease-in;
-  font-size: 16px;
+  font-size: 12px;
+  @screen md {
+    font-size: 16px;
+  }
   top: 0 !important;
   width: 100%;
   left: 0 !important;
