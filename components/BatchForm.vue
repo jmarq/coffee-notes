@@ -46,21 +46,11 @@ import { numeric, required } from 'vuelidate/lib/validators';
 import BeanForm from './BeanForm';
 import BeanSelector from './BeanSelector';
 const customBeanIdValidator = (value, vm) => {
-  if (vm.bean || value) {
-    return true;
-  } else {
-    console.log('invalid bean id');
-    return false;
-  }
+  return Boolean(vm.bean || value);
 };
 
 const customBeanValidator = (value, vm) => {
-  if (vm.bean_id || (value && value.name && value.roast_profile)) {
-    return true;
-  } else {
-    console.log('invalid bean');
-    return false;
-  }
+  return Boolean(vm.bean_id || (value && value.name && value.roast_profile));
 };
 
 export default {
@@ -89,23 +79,15 @@ export default {
     updateBean(bean) {
       this.bean = bean;
       this.bean_id = undefined;
-      console.log('bean updated in BatchForm. invalid?');
-      console.log({ invalid: this.$v.$invalid });
     },
     updateBeanId(id) {
       if (this.bean_id) {
         this.bean = undefined;
       }
       this.bean_id = id;
-
-      console.log('bean_id updated in BatchForm. invalid?');
-      console.log({ invalid: this.$v.$invalid });
-      console.log({ id });
     },
     submit() {
-      console.log('submitting?');
       if (!this.$v.$invalid) {
-        console.log('valid submission');
         const payload = {
           bean: this.bean,
           bean_id: this.bean_id,
