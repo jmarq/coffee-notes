@@ -16,10 +16,13 @@ import { allBeans } from '@/helpers/dataHelpers';
 import SelectedBean from './SelectedBean';
 
 export default {
+  props: {
+    initialBean: String,
+  },
   components: { SelectedBean },
   data() {
     return {
-      selectedBeanId: undefined,
+      selectedBeanId: this.initialBean,
     };
   },
   computed: {

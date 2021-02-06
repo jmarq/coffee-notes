@@ -3,7 +3,10 @@
     <p v-if="$v.$invalid" class="invalid-warning">Fill out required fields</p>
     <p v-else>It's Good</p>
     <section class="beans">
-      <bean-selector @beanSelectionChange="updateBeanId"></bean-selector>
+      <bean-selector
+        :initial-bean="bean_id"
+        @beanSelectionChange="updateBeanId"
+      ></bean-selector>
       <BeanForm :show="!bean_id" @beanChange="updateBean"></BeanForm>
     </section>
     <section class="batch-fields">
@@ -43,6 +46,7 @@
 
 <script>
 import { numeric, required } from 'vuelidate/lib/validators';
+import { mostRecentBatch } from '@/helpers/dataHelpers';
 import BeanForm from './BeanForm';
 import BeanSelector from './BeanSelector';
 const customBeanIdValidator = (value, vm) => {
@@ -56,11 +60,13 @@ const customBeanValidator = (value, vm) => {
 export default {
   components: { BeanForm, BeanSelector },
   data() {
+    const mostRecent = mostRecentBatch() || {};
+    console.log(mostRecent);
     return {
-      bean: undefined,
-      bean_id: undefined,
+      bean: mostRecent.bean,
+      bean_id: mostRecent.bean_id,
       note: undefined,
-      grind_size: undefined,
+      grind_size: mostRecent.grind_size,
       batch_size_oz: undefined,
       grinds_oz: undefined,
       rating: undefined,
