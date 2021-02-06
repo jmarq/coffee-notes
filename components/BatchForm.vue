@@ -66,7 +66,7 @@ export default {
       bean: mostRecent.bean,
       bean_id: mostRecent.bean_id,
       note: undefined,
-      grind_size: mostRecent.grind_size,
+      grind_size: undefined,
       batch_size_oz: undefined,
       grinds_oz: undefined,
       rating: undefined,
