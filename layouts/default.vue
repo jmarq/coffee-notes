@@ -14,6 +14,7 @@ export default {
       console.log('in browser');
       this.$store.dispatch('performInitialLoad');
       this.$store.commit('setWindowWidth', window.innerWidth);
+      console.log('done with default layout mounted stack');
     }
   },
 };
