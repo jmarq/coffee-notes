@@ -38,7 +38,9 @@
     </section>
     <transition name="button-fade">
       <section v-if="!$v.$invalid" class="submit-section">
-        <button class="coffee-button" @click="submit">submit</button>
+        <button class="coffee-button" @click="submit">
+          {{ editingBatch ? 'Update batch info' : 'Submit' }}
+        </button>
       </section>
     </transition>
   </div>
@@ -59,7 +61,24 @@ const customBeanValidator = (value, vm) => {
 
 export default {
   components: { BeanForm, BeanSelector },
+  props: {
+    editingBatch: Object,
+  },
   data() {
+    if (this.editingBatch) {
+      console.log('in BatchForm data(). have editingBatch');
+      const { editingBatch } = this;
+      const result = {
+        bean: editingBatch.bean,
+        bean_id: editingBatch.bean_id,
+        note: editingBatch.note,
+        grind_size: editingBatch.grind_size,
+        batch_size_oz: editingBatch.batch_size_oz,
+        grinds_oz: editingBatch.grinds_oz,
+        rating: editingBatch.rating,
+      };
+      return result;
+    }
     const mostRecent = mostRecentBatch() || {};
     console.log(mostRecent);
     return {
@@ -71,6 +90,22 @@ export default {
       grinds_oz: undefined,
       rating: undefined,
     };
+  },
+  watch: {
+    editingBatch: {
+      deep: true,
+      handler() {
+        console.log('editing bean prop changed!');
+        const { editingBatch } = this;
+        this.bean = editingBatch.bean;
+        this.bean_id = editingBatch.bean_id;
+        this.note = editingBatch.note;
+        this.grind_size = editingBatch.grind_size;
+        this.grinds_oz = editingBatch.grinds_oz;
+        this.batch_size_oz = editingBatch.batch_size_oz;
+        this.rating = editingBatch.rating;
+      },
+    },
   },
   validations: {
     bean_id: { customBeanIdValidator },
@@ -93,6 +128,10 @@ export default {
       this.bean_id = id;
     },
     submit() {
+      let date = Date.now();
+      if (this.editingBatch) {
+        date = this.editingBatch.date;
+      }
       if (!this.$v.$invalid) {
         const payload = {
           bean: this.bean,
@@ -102,7 +141,7 @@ export default {
           batch_size_oz: this.batch_size_oz,
           note: this.note,
           rating: this.rating,
-          date: Date.now(),
+          date,
         };
         this.$emit('batchSubmitted', payload);
       } else {

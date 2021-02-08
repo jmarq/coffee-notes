@@ -30,6 +30,11 @@ export default {
       return allBeans();
     },
   },
+  watch: {
+    initialBean() {
+      this.selectedBeanId = this.initialBean;
+    },
+  },
   methods: {
     selectionChange(ev) {
       console.log('bean selection changed');

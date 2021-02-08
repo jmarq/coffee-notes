@@ -5,12 +5,15 @@
       <p>{{ batch.bean.name }}</p>
       {{ batch.note }}
     </div>
+    <BatchForm :editing-batch="batch" @batchSubmitted="updateBatch"></BatchForm>
   </div>
 </template>
 
 <script>
+import BatchForm from '@/components/BatchForm';
 import Batch from '@/models/Batch';
 export default {
+  components: { BatchForm },
   computed: {
     batch() {
       const id = this.$route.params.id;
@@ -19,6 +22,13 @@ export default {
       // const batch = Batch.find(id);
       console.log({ batch });
       return batch;
+    },
+  },
+  methods: {
+    updateBatch(payload) {
+      Batch.$update({
+        data: { ...payload, id: this.batch.id },
+      });
     },
   },
 };
