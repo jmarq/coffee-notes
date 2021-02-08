@@ -76,8 +76,11 @@ export default {
 // there is a bug where these can stay locked visible if the use uses the browser back button to navigate away from the page
 #vg-tooltip-element,
 #vg-tooltip-element[style] {
+  // .visible {
+  //   pointer-events: none;
+  // }
   &:not(.visible) {
-    // pointer-events: none;
+    pointer-events: none;
     opacity: 0;
   }
   border: none;
