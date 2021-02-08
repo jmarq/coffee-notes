@@ -42,6 +42,11 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+body {
+  @apply bg-blue-900;
+  background-image: url(https://i.pinimg.com/originals/8b/0c/23/8b0c231572d5748b926af83998b23767.jpg);
+  background-blend-mode: luminosity;
+}
 
 .main-wrapper {
   max-width: 850px;

@@ -14,7 +14,7 @@
 
       <div class="coffee">
         <h1 v-if="!batches.length" class="title">no notes yet</h1>
-        <ul ref="listo2">
+        <ul>
           <li
             v-for="batch in batches"
             :key="batch.id"
@@ -54,34 +54,7 @@ export default {
 };
 </script>
 
-<style>
-body {
-  @apply bg-purple-200;
-  background-image: url(https://i.pinimg.com/originals/8b/0c/23/8b0c231572d5748b926af83998b23767.jpg);
-}
-
-.container {
-  margin: 0 auto;
-  /* min-height: 100vh; */
-}
-
-.header-image {
-  display: flex;
-  justify-content: center;
-}
-
-.kangaroos {
-  max-width: 800px;
-  @apply border-indigo-900;
-  border-width: 4px;
-  @apply p-3;
-  @apply bg-orange-300;
-}
-
-.links {
-  padding-top: 15px;
-}
-
+<style scoped>
 .coffee ul {
   @apply p-2;
   @apply bg-pink-100;
