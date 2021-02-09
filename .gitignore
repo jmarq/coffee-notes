@@ -92,3 +92,6 @@ sw.*
 # cypress artifacts
 cypress/videos/*
 cypress/screenshots/*
+
+#local todo notes
+TODO

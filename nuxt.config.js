@@ -39,4 +39,8 @@ export default {
     port: 3000, // default: 3000
     host: '0.0.0.0', // (yay we can test mobile) default: localhost
   },
+  // if the built static app gets deployed to a subdirectory, set the router base here
+  // router: {
+  //   base: '/serverSubdirectoryGoesHere/',
+  // },
 };
