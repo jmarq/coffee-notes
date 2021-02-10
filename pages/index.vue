@@ -24,7 +24,9 @@
             {{ batch.bean.name }} ({{ batch.bean.roast_profile }}
             roast) -
             {{ batch.note }}
-            <nuxt-link class="text-red-500" :to="`/batches/${batch.id}`"
+            <nuxt-link
+              class="text-red-500"
+              :to="{ path: 'batches/edit', query: { id: batch.id } }"
               >view</nuxt-link
             >
           </li>

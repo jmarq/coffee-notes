@@ -16,10 +16,9 @@ export default {
   components: { BatchForm },
   computed: {
     batch() {
-      const id = this.$route.params.id;
+      const id = this.$route.query.id;
       console.log(id);
       const batch = Batch.query().with('bean').whereId(id).first();
-      // const batch = Batch.find(id);
       console.log({ batch });
       return batch;
     },
