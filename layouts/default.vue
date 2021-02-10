@@ -9,7 +9,7 @@
 import MainNav from '@/components/MainNav';
 export default {
   components: { MainNav },
-  mounted() {
+  beforeMount() {
     if (process.browser) {
       console.log('in browser');
       this.$store.dispatch('performInitialLoad');
@@ -44,7 +44,7 @@ html {
 }
 body {
   @apply bg-blue-900;
-  background-image: url(https://i.pinimg.com/originals/8b/0c/23/8b0c231572d5748b926af83998b23767.jpg);
+  // background-image: url(https://i.pinimg.com/originals/8b/0c/23/8b0c231572d5748b926af83998b23767.jpg);
   background-blend-mode: luminosity;
 }
 

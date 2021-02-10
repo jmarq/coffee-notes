@@ -51,6 +51,7 @@ import { numeric, required } from 'vuelidate/lib/validators';
 import { mostRecentBatch } from '@/helpers/dataHelpers';
 import BeanForm from './BeanForm';
 import BeanSelector from './BeanSelector';
+
 const customBeanIdValidator = (value, vm) => {
   return Boolean(vm.bean || value);
 };
@@ -79,17 +80,24 @@ export default {
       };
       return result;
     }
-    const mostRecent = mostRecentBatch() || {};
-    console.log(mostRecent);
+
     return {
-      bean: mostRecent.bean,
-      bean_id: mostRecent.bean_id,
+      bean: undefined,
+      bean_id: undefined,
       note: undefined,
       grind_size: undefined,
       batch_size_oz: undefined,
       grinds_oz: undefined,
       rating: undefined,
     };
+  },
+  computed: {
+    mostRecent() {
+      console.log('computing most recent batch');
+      const result = mostRecentBatch() || {};
+      console.log(result);
+      return result;
+    },
   },
   watch: {
     editingBatch: {
@@ -106,6 +114,15 @@ export default {
         this.rating = editingBatch.rating;
       },
     },
+    mostRecent: {
+      deep: true,
+      handler() {
+        console.log('most recent batch computed changed');
+        if (!this.bean_id && !this.bean) {
+          this.bean_id = this.mostRecent.bean.id;
+        }
+      },
+    },
   },
   validations: {
     bean_id: { customBeanIdValidator },
@@ -114,6 +131,12 @@ export default {
     batch_size_oz: { numeric, required },
     grinds_oz: { numeric },
     rating: { numeric },
+  },
+
+  mounted() {
+    if (!this.bean_id && !this.bean) {
+      this.bean_id = this.mostRecent.bean_id;
+    }
   },
 
   methods: {
