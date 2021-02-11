@@ -40,7 +40,7 @@ export default {
     host: '0.0.0.0', // (yay we can test mobile) default: localhost
   },
   // if the built static app gets deployed to a subdirectory, set the router base here
-  // router: {
-  //   base: '/serverSubdirectoryGoesHere/',
-  // },
+  router: {
+    base: '/coffee/',
+  },
 };
