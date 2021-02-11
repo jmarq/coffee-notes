@@ -28,6 +28,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/pwa',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -42,5 +43,11 @@ export default {
   // if the built static app gets deployed to a subdirectory, set the router base here
   router: {
     base: '/coffee/',
+  },
+
+  pwa: {
+    manifest: {
+      name: 'Coffee Notes',
+    },
   },
 };

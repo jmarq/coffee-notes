@@ -93,5 +93,8 @@ sw.*
 cypress/videos/*
 cypress/screenshots/*
 
+# service worker
+sw.*
+
 #local todo notes
 TODO
