@@ -23,11 +23,11 @@
             {{ new Date(batch.date).toLocaleString() }}
             {{ batch.bean.name }} ({{ batch.bean.roast_profile }}
             roast) -
-            {{ batch.note }}
+            <span class="batch-note">{{ batch.note }}</span>
             <nuxt-link
               class="text-red-500"
               :to="{ path: 'batches/edit', query: { id: batch.id } }"
-              >view</nuxt-link
+              >edit</nuxt-link
             >
           </li>
         </ul>
@@ -74,6 +74,11 @@ export default {
   @apply pt-1;
   @apply text-left;
   border-bottom: 1px solid turquoise;
+}
+
+.coffee li span.batch-note {
+  font-family: 'courier new';
+  @apply font-normal;
 }
 .coffee li.justCreated {
   @apply bg-orange-200;
