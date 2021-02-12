@@ -80,6 +80,7 @@ td:first-child {
 
 td:nth-child(2) {
   @apply px-2;
+  font-family: 'courier new';
 }
 
 .fade-enter-active,
