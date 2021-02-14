@@ -46,8 +46,10 @@ export default {
 
 #chart {
   width: 100%;
-  // min-width: 600px;
-  height: 700px;
+  height: 500px;
+  @screen md {
+    height: 700px;
+  }
   display: block;
   overflow-x: auto;
 }
