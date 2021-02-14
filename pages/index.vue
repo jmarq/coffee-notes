@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <div>
-      <!-- <h1 class="title">coffee-notes</h1> -->
-      <!-- <section class="header-image">
+    <!-- <h1 class="title">coffee-notes</h1> -->
+    <!-- <section class="header-image">
         <img
           class="kangaroos"
           src="https://www.darbypop.com/wp-content/uploads/2020/06/Darby-Bites-99-copy.png"
@@ -10,44 +9,17 @@
           loading="lazy"
         />
       </section> -->
-      <latest-batch></latest-batch>
-
-      <div class="coffee">
-        <h1 v-if="!batches.length" class="title">no notes yet</h1>
-        <ul>
-          <li
-            v-for="batch in batches"
-            :key="batch.id"
-            :class="{ justCreated: batch.id == createdBatch }"
-          >
-            {{ new Date(batch.date).toLocaleString() }}
-            {{ batch.bean.name }} ({{ batch.bean.roast_profile }}
-            roast) -
-            <span class="batch-note">{{ batch.note }}</span>
-            <nuxt-link
-              class="text-red-500"
-              :to="{ path: 'batches/edit', query: { id: batch.id } }"
-              >edit</nuxt-link
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
+    <latest-batch></latest-batch>
+    <batch-list :created-batch="createdBatch"></batch-list>
   </div>
 </template>
 
 <script>
-import { allBatches, mostRecentBatch } from '@/helpers/dataHelpers';
 import LatestBatch from '@/components/LatestBatch.vue';
+import BatchList from '@/components/BatchList.vue';
 export default {
-  components: { LatestBatch },
+  components: { LatestBatch, BatchList },
   computed: {
-    batches: () => {
-      return allBatches();
-    },
-    mostRecent() {
-      return mostRecentBatch();
-    },
     createdBatch() {
       console.log(this.$route);
       return this.$route.query.newId;
@@ -55,42 +27,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.coffee ul {
-  @apply p-2;
-  @apply bg-pink-100;
-  @apply rounded-md;
-  @apply border-indigo-600;
-  @apply border;
-  @apply overflow-y-auto;
-  max-height: 600px;
-}
-
-.coffee li {
-  @apply text-lg;
-  @apply font-bold;
-  @apply pb-2;
-  @apply pt-1;
-  @apply text-left;
-  border-bottom: 1px solid turquoise;
-}
-
-.coffee li span.batch-note {
-  font-family: 'courier new';
-  @apply font-normal;
-}
-.coffee li.justCreated {
-  @apply bg-orange-200;
-  animation: highlightnew 1000ms ease-in-out alternate infinite;
-}
-
-@keyframes highlightnew {
-  from {
-    @apply bg-green-200;
-  }
-  to {
-    @apply bg-orange-300;
-  }
-}
-</style>
