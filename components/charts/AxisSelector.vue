@@ -40,10 +40,12 @@ export default {
   @apply flex;
   align-items: center;
   @apply font-bold;
-  background-color: #eee;
+  background-color: rgba(255, 255, 255, 0.8);
   select {
     @apply ml-2;
     @apply p-2;
+    @apply border-2;
+    @apply border-white;
   }
 
   label {

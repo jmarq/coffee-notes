@@ -14,7 +14,7 @@
     @apply p-2;
   }
   @screen xl {
-    @apply text-3xl;
+    @apply text-2xl;
   }
   @apply text-base;
   @apply p-1;
