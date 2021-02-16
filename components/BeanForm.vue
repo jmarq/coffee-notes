@@ -16,10 +16,10 @@
             {{ profile }}
           </option>
         </select>
-        <section class="new-bean-preview">
+        <!-- <section class="new-bean-preview">
           <p>new bean name: {{ newBean.name }}</p>
           <p>selected roast: {{ newBean.roast_profile }}</p>
-        </section>
+        </section> -->
       </form>
     </div>
   </transition>
@@ -66,8 +66,6 @@ export default {
 
 <style scoped lang="scss">
 .bean-form-wrapper {
-  @apply border;
-  @apply border-purple-700;
   overflow: hidden;
   transform-origin: top left;
 }
@@ -76,12 +74,6 @@ select,
 option,
 input {
   @apply text-red-900;
-}
-
-.new-bean-preview {
-  @apply text-2xl;
-  @apply font-bold;
-  @apply text-purple-400;
 }
 
 .fade-enter-active,

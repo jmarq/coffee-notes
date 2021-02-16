@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">Enter batch info</h1>
     <BatchForm @batchSubmitted="addBatch"></BatchForm>
   </div>
 </template>

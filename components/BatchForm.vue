@@ -188,9 +188,11 @@ export default {
 }
 
 .beans {
-  @apply border;
-  @apply border-red-900;
-  height: 250px;
+  @apply p-2;
+  // @apply border;
+  // @apply border-red-900;
+  @apply rounded-md;
+  background-color: rgba(77, 41, 8, 0.3);
 }
 
 label {
