@@ -1,19 +1,2 @@
 // is this file necessary? consider moving these styles to the components/pages where they are used
 // if they are used in multiple places, consider creating components.
-
-label[required] {
-  &::after {
-    content: '*';
-    @apply text-red-600;
-  }
-}
-
-// this isn't specific enough to hit some fields in the batch form.
-input:invalid,
-textarea:invalid,
-select:invalid {
-  @apply border-red-600;
-  @apply bg-green-300;
-  @apply border-2;
-  transition: 500ms linear;
-}

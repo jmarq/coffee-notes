@@ -1,7 +1,6 @@
 <template>
   <transition name="fade">
     <div v-if="show" class="bean-form-wrapper">
-      enter bean details here!!
       <form @submit.prevent>
         <label for="bean-name" required>Bean Name</label>
         <input id="bean-name" v-model="newBean.name" type="text" required />
@@ -68,12 +67,6 @@ export default {
 .bean-form-wrapper {
   overflow: hidden;
   transform-origin: top left;
-}
-
-select,
-option,
-input {
-  @apply text-red-900;
 }
 
 .fade-enter-active,

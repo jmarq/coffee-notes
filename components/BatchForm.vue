@@ -131,6 +131,7 @@ export default {
     batch_size_oz: { numeric, required },
     grinds_oz: { numeric },
     rating: { numeric },
+    note: {},
   },
 
   mounted() {
@@ -189,21 +190,23 @@ export default {
 
 .beans {
   @apply p-2;
-  // @apply border;
-  // @apply border-red-900;
   @apply rounded-md;
   background-color: rgba(77, 41, 8, 0.3);
+  ::v-deep label {
+    @apply text-purple-400;
+  }
 }
 
-label {
+::v-deep label {
   @apply text-lg;
   @apply font-bold;
   @apply block;
   @apply mt-2;
 }
 
-input,
-textarea {
+::v-deep input,
+::v-deep textarea,
+::v-deep select {
   @apply text-lg;
   @apply font-bold;
   @apply p-1;
@@ -214,17 +217,34 @@ textarea {
   width: 100%;
 }
 
-input,
-textarea,
-select,
-option {
-  @apply text-red-900;
+::v-deep input,
+::v-deep textarea,
+::v-deep select,
+::v-deep option {
+  @apply text-black;
 }
 
-.batch-form-wrapper option,
-.batch-form-wrapper select {
-  @apply text-red-900;
+// ::v-deep used to target inputs in child components.
+::v-deep label[required] {
+  &::after {
+    content: '*';
+    @apply text-red-600;
+  }
 }
+
+::v-deep input:invalid,
+::v-deep textarea:invalid,
+::v-deep select:invalid {
+  @apply border-red-600;
+  @apply bg-green-300;
+  @apply border-2;
+  transition: 500ms linear;
+}
+
+// .batch-form-wrapper option,
+// .batch-form-wrapper select {
+//   @apply text-red-900;
+// }
 
 .submit-section {
   @apply pt-2;

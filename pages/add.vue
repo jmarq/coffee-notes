@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .wrapper {
   margin-left: auto;
   margin-right: auto;
