@@ -79,10 +79,23 @@ body {
   @apply text-green-900;
 }
 
+// consider breaking the link elements into componenets
 .link:hover {
   @apply bg-green-300;
   @apply underline;
   box-shadow: 0px 0px 15px #909;
+}
+
+.subpage-link {
+  @apply px-2;
+  @apply py-1;
+  @apply mb-1;
+  @apply bg-orange-300;
+  @apply rounded-md;
+  @apply inline-block;
+  &.nuxt-link-exact-active {
+    @apply bg-blue-300;
+  }
 }
 
 .title {
