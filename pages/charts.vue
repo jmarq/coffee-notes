@@ -48,7 +48,7 @@ export default {
   width: 100%;
   height: 500px;
   @screen md {
-    height: 700px;
+    height: 650px;
   }
   display: block;
   overflow-x: auto;
