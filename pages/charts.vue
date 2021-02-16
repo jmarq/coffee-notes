@@ -33,7 +33,6 @@ export default {
 .charts-wrapper svg {
   @apply border-2;
   @apply border-green-400;
-  @apply bg-orange-200;
 }
 
 .chart-page-wrapper {
