@@ -24,8 +24,8 @@ export default {
 @import '../assets/main.scss';
 
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Yantramanav', 'Source Sans Pro', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 20px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -87,6 +87,7 @@ body {
 }
 
 .subpage-link {
+  font-family: 'Pacifico';
   @apply px-2;
   @apply py-1;
   @apply mb-1;
@@ -110,12 +111,13 @@ body {
   }
   @apply text-2xl;
   @apply italic;
-  @apply font-bold;
+  // @apply font-bold;
   @apply text-green-200;
   @apply underline;
   @apply shadow-md;
   @apply text-center;
-  font-family: serif;
+  @apply mb-2;
+  font-family: 'Pacifico';
   text-shadow: 5px 5px 5px #222;
 }
 </style>

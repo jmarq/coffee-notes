@@ -9,6 +9,7 @@
 
 <style scoped lang="scss">
 .link {
+  font-family: 'Pacifico';
   @screen md {
     @apply text-xl;
     @apply p-2;

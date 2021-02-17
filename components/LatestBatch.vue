@@ -1,7 +1,7 @@
 <template>
   <section class="recent-batch">
     <div v-if="mostRecent" class="recent-batch-info">
-      <h2 class="font-bold text-xl">Previous batch</h2>
+      <h2 class="text-xl">Previous batch</h2>
       <transition name="fade" appear>
         <table>
           <tbody>
@@ -57,6 +57,7 @@ export default {
 
 h2 {
   @apply text-center;
+  font-family: 'Pacifico';
   text-shadow: 2px 2px 2px #bbf;
 }
 

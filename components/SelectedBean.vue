@@ -1,6 +1,6 @@
 <template>
   <transition name="selected-bean-fade" appear>
-    <section v-if="bean">
+    <section class="selected-bean" v-if="bean">
       <p>{{ bean.name }}</p>
       <p v-if="bean.roast_profile">{{ bean.roast_profile }} roast</p>
     </section>
@@ -19,15 +19,18 @@ export default {
 };
 </script>
 
-<style scoped>
-section {
+<style scoped lang="scss">
+.selected-bean {
   opacity: 1;
   transform-origin: top left;
-}
-p {
-  @apply text-2xl;
-  @apply font-bold;
-  @apply text-purple-400;
+  @apply py-2;
+
+  p {
+    @apply text-2xl;
+    @apply font-bold;
+    // @apply text-purple-400;
+    @apply text-gray-200;
+  }
 }
 
 .selected-bean-fade-enter-active,
