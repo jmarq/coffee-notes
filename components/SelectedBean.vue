@@ -27,9 +27,8 @@ export default {
 
   p {
     @apply text-2xl;
-    @apply font-bold;
-    // @apply text-purple-400;
     @apply text-gray-200;
+    font-family: 'Pacifico';
   }
 }
 

@@ -18,6 +18,26 @@ export function adjustFontSizes(spec, windowWidth) {
   return result;
 }
 
+/*
+"config": {
+  "axis": {"labelFont": "monospace", "titleFont": "monospace"},
+  "legend": {"labelFont": "monospace", "titleFont": "monospace"},
+  "header": {"labelFont": "monospace", "titleFont": "monospace"},
+  "mark": {"font": "monospace"},
+  "title": {"font": "monospace", "subtitleFont": "monospace"}
+}
+*/
+export function adjustFontFamily(spec, font) {
+  const result = spec;
+  result.config.axis.labelFont = font;
+  result.config.axis.titleFont = font;
+  result.config.legend.labelFont = font;
+  result.config.legend.titleFont = font;
+  // result.config.title.font = font;
+  // result.config.title.subtitleFont = font;
+  return result;
+}
+
 export function adjustLegendLayout(spec, windowWidth) {
   const result = spec;
   if (windowWidth < 800) {

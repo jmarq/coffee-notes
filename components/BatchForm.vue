@@ -1,6 +1,8 @@
 <template>
   <div class="batch-form-wrapper">
-    <p v-if="$v.$invalid" class="invalid-warning">Fill out required fields</p>
+    <p v-if="$v.$invalid" class="invalid-warning">
+      Fill out <span>required</span> fields
+    </p>
     <p v-else>It's Good</p>
     <section class="beans">
       <bean-selector
@@ -11,12 +13,22 @@
     </section>
     <section class="batch-fields">
       <div>
-        <label for="grind_size">Grind size</label>
-        <input id="grind_size" v-model.number="grind_size" type="number" />
+        <label for="grind_size" required>Grind size</label>
+        <input
+          id="grind_size"
+          v-model.number="grind_size"
+          type="number"
+          required
+        />
       </div>
       <div>
-        <label for="grinds_oz">Grounds (in ounces)</label>
-        <input id="grinds_oz" v-model.number="grinds_oz" type="number" />
+        <label for="grinds_oz" required>Grounds (in ounces)</label>
+        <input
+          id="grinds_oz"
+          v-model.number="grinds_oz"
+          type="number"
+          required
+        />
       </div>
       <div>
         <label for="batch_size_oz" required>Batch Size (in ounces)</label>
@@ -28,8 +40,8 @@
         />
       </div>
       <div>
-        <label for="rating">Rating (scale ??-??)</label>
-        <input id="rating" v-model.number="rating" type="number" />
+        <label for="rating" required>Rating (scale ??-??)</label>
+        <input id="rating" v-model.number="rating" type="number" required />
       </div>
       <div>
         <label for="note">Note</label>
@@ -127,10 +139,10 @@ export default {
   validations: {
     bean_id: { customBeanIdValidator },
     bean: { customBeanValidator },
-    grind_size: { numeric },
+    grind_size: { numeric, required },
     batch_size_oz: { numeric, required },
-    grinds_oz: { numeric },
-    rating: { numeric },
+    grinds_oz: { numeric, required },
+    rating: { numeric, required },
     note: {},
   },
 
@@ -188,6 +200,11 @@ export default {
   margin-right: auto;
 }
 
+.invalid-warning {
+  span {
+    @apply text-green-300;
+  }
+}
 .beans {
   @apply p-2;
   @apply rounded-md;

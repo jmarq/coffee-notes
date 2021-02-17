@@ -109,6 +109,7 @@ export default {
       result.encoding.y = axisConfigs[this.yAxisAttribute];
       result = specHelpers.adjustLegendLayout(result, this.windowWidth);
       result = specHelpers.adjustFontSizes(result, this.windowWidth);
+      result = specHelpers.adjustFontFamily(result, 'Yantramanav');
       return result;
     },
   },
