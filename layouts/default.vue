@@ -52,6 +52,7 @@ body {
   max-width: 850px;
   margin-left: auto;
   margin-right: auto;
+  @apply px-1;
 }
 
 .coffee-button {
