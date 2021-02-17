@@ -93,7 +93,7 @@ export default {
       return Batch.query()
         .with('bean')
         .get()
-        .filter((batch) => batch.rating);
+        .filter((batch) => typeof batch.rating !== 'undefined');
     },
     vegaLiteSpec() {
       let result = {

@@ -82,9 +82,12 @@ describe('add page', () => {
     const options = beanSelect.findAll('option');
     await options.at(1).setSelected();
     await beanSelect.trigger('change');
-    const batchSizeInput = wrapper.find('input#batch_size_oz');
-    expect(batchSizeInput.exists()).toEqual(true);
-    await batchSizeInput.setValue(40);
+
+    // enter data in all of the required fields
+    const requiredInputs = wrapper.findAll('input[required]');
+    for (const input of requiredInputs.wrappers) {
+      await input.setValue(40);
+    }
 
     const theButton = wrapper.find('.coffee-button');
     expect(theButton.exists()).toEqual(true);
