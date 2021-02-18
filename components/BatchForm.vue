@@ -72,42 +72,45 @@ const customBeanValidator = (value, vm) => {
   return Boolean(vm.bean_id || (value && value.name && value.roast_profile));
 };
 
+const getInitialDataForEdit = (editingBatch) => {
+  const result = {
+    bean: editingBatch.bean,
+    bean_id: editingBatch.bean_id,
+    note: editingBatch.note,
+    grind_size: editingBatch.grind_size,
+    batch_size_oz: editingBatch.batch_size_oz,
+    grinds_oz: editingBatch.grinds_oz,
+    rating: editingBatch.rating,
+  };
+  return result;
+};
+
 export default {
   components: { BeanForm, BeanSelector },
   props: {
     editingBatch: Object,
   },
   data() {
+    let result = {};
     if (this.editingBatch) {
-      console.log('in BatchForm data(). have editingBatch');
       const { editingBatch } = this;
-      const result = {
-        bean: editingBatch.bean,
-        bean_id: editingBatch.bean_id,
-        note: editingBatch.note,
-        grind_size: editingBatch.grind_size,
-        batch_size_oz: editingBatch.batch_size_oz,
-        grinds_oz: editingBatch.grinds_oz,
-        rating: editingBatch.rating,
+      result = getInitialDataForEdit(editingBatch);
+    } else {
+      result = {
+        bean: undefined,
+        bean_id: undefined,
+        note: undefined,
+        grind_size: undefined,
+        batch_size_oz: undefined,
+        grinds_oz: undefined,
+        rating: undefined,
       };
-      return result;
     }
-
-    return {
-      bean: undefined,
-      bean_id: undefined,
-      note: undefined,
-      grind_size: undefined,
-      batch_size_oz: undefined,
-      grinds_oz: undefined,
-      rating: undefined,
-    };
+    return result;
   },
   computed: {
     mostRecent() {
-      console.log('computing most recent batch');
       const result = mostRecentBatch() || {};
-      console.log(result);
       return result;
     },
   },
@@ -115,7 +118,6 @@ export default {
     editingBatch: {
       deep: true,
       handler() {
-        console.log('editing bean prop changed!');
         const { editingBatch } = this;
         this.bean = editingBatch.bean;
         this.bean_id = editingBatch.bean_id;
@@ -129,7 +131,6 @@ export default {
     mostRecent: {
       deep: true,
       handler() {
-        console.log('most recent batch computed changed');
         if (!this.bean_id && !this.bean) {
           this.bean_id = this.mostRecent.bean.id;
         }
@@ -163,22 +164,26 @@ export default {
       }
       this.bean_id = id;
     },
-    submit() {
+    generateSubmissionPayload() {
       let date = Date.now();
       if (this.editingBatch) {
         date = this.editingBatch.date;
       }
+      const result = {
+        bean: this.bean,
+        bean_id: this.bean_id,
+        grind_size: this.grind_size,
+        grinds_oz: this.grinds_oz,
+        batch_size_oz: this.batch_size_oz,
+        note: this.note,
+        rating: this.rating,
+        date,
+      };
+      return result;
+    },
+    submit() {
       if (!this.$v.$invalid) {
-        const payload = {
-          bean: this.bean,
-          bean_id: this.bean_id,
-          grind_size: this.grind_size,
-          grinds_oz: this.grinds_oz,
-          batch_size_oz: this.batch_size_oz,
-          note: this.note,
-          rating: this.rating,
-          date,
-        };
+        const payload = this.generateSubmissionPayload();
         this.$emit('batchSubmitted', payload);
       } else {
         console.log('invalid submission');

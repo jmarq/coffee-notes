@@ -37,8 +37,6 @@ export default {
   },
   methods: {
     selectionChange(ev) {
-      console.log('bean selection changed');
-      console.log(ev.target.value);
       this.$emit('beanSelectionChange', this.selectedBeanId);
     },
   },

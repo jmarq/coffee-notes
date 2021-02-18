@@ -15,10 +15,6 @@
             {{ profile }}
           </option>
         </select>
-        <!-- <section class="new-bean-preview">
-          <p>new bean name: {{ newBean.name }}</p>
-          <p>selected roast: {{ newBean.roast_profile }}</p>
-        </section> -->
       </form>
     </div>
   </transition>
@@ -47,8 +43,8 @@ export default {
     newBean: {
       deep: true,
       handler() {
-        console.log('bean changed! is it invalid?s');
-        console.log(this.$v.$invalid);
+        // console.log('bean changed! is it invalid?');
+        // console.log(this.$v.$invalid);
         this.$emit('beanChange', this.newBean);
       },
     },
