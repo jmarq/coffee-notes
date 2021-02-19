@@ -3,7 +3,7 @@
     <axis-selector
       v-model="yAxisAttribute"
       axis="y"
-      :axis-options="axisOptions"
+      :axis-options="yAxisOptions"
     ></axis-selector>
     <!-- perhaps move these charts into a component -->
     <div id="chart" ref="chart">
@@ -12,7 +12,7 @@
     <axis-selector
       v-model="xAxisAttribute"
       axis="x"
-      :axis-options="axisOptions"
+      :axis-options="xAxisOptions"
     ></axis-selector>
   </div>
 </template>
@@ -26,51 +26,46 @@ import Bean from '@/models/Bean';
 import beanBar from '@/helpers/vegaSpecs/beanBar';
 import * as specHelpers from '@/helpers/vegaSpecs/specHelpers';
 
-vega.expressionFunction('hello', function (datum, params) {
-  // this is probably too inefficient once we have a lot of beans
+vega.expressionFunction('beanNameFromId', function (datum, params) {
   const theBean = Bean.find(datum);
   return theBean.name;
 });
 
-const axisConfigs = {
-  date: {
-    field: 'date',
-    type: 'temporal',
-    title: 'date',
-  },
-  grinds_oz: {
-    field: 'grinds_oz',
-    type: 'quantitative',
-    title: 'grinds amount',
-  },
-  batch_size_oz: {
-    field: 'batch_size_oz',
-    type: 'quantitative',
-    title: 'batch size',
-  },
-  rating: {
-    field: 'rating',
-    type: 'quantitative',
-    title: 'rating',
-  },
-  mean_rating: {
-    field: 'rating',
-    type: 'quantitative',
-    title: 'mean rating',
-    aggregate: 'mean',
+const xAxisConfigs = {
+  bean_roast: {
+    field: 'bean.roast_profile',
+    type: 'ordinal',
+    title: 'roast profile',
   },
   bean_id: {
     field: 'bean.id',
     type: 'nominal',
     title: 'bean',
     axis: {
-      // labelExpr: 'datum.label',
-      // was trying to use the parent datum in the formatting but that seems to be tricky
-      // I mean, we could look up the bean by its id again just to get its name, but that seems like a lot...
-      format: 'bean.name',
-      formatType: 'hello',
+      formatType: 'beanNameFromId',
       labelAngle: -65,
     },
+  },
+};
+
+const yAxisConfigs = {
+  grinds_oz: {
+    field: 'grinds_oz',
+    type: 'quantitative',
+    title: 'grinds used (oz)',
+    aggregate: 'sum',
+  },
+  batch_size_oz: {
+    field: 'batch_size_oz',
+    type: 'quantitative',
+    title: 'total oz made',
+    aggregate: 'sum',
+  },
+  mean_rating: {
+    field: 'rating',
+    type: 'quantitative',
+    title: 'average rating',
+    aggregate: 'mean',
   },
 };
 
@@ -83,7 +78,8 @@ export default {
       chart: undefined,
       xAxisAttribute: 'bean_id',
       yAxisAttribute: 'mean_rating',
-      axisOptions: Object.entries(axisConfigs),
+      xAxisOptions: Object.entries(xAxisConfigs),
+      yAxisOptions: Object.entries(yAxisConfigs),
     };
   },
 
@@ -105,8 +101,8 @@ export default {
       result.data = {
         values: this.chartData,
       };
-      result.encoding.x = axisConfigs[this.xAxisAttribute];
-      result.encoding.y = axisConfigs[this.yAxisAttribute];
+      result.encoding.x = xAxisConfigs[this.xAxisAttribute];
+      result.encoding.y = yAxisConfigs[this.yAxisAttribute];
       result = specHelpers.adjustLegendLayout(result, this.windowWidth);
       result = specHelpers.adjustFontSizes(result, this.windowWidth);
       result = specHelpers.adjustFontFamily(result, 'Yantramanav');
