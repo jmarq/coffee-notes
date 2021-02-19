@@ -14,7 +14,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Pacifico&family=Yantramanav&display=swap',
+        href:
+          'https://fonts.googleapis.com/css2?family=Pacifico&family=Yantramanav&display=swap',
       },
     ],
   },
@@ -41,7 +42,11 @@ export default {
   modules: [],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    analyze: {
+      analyzerMode: 'static',
+    },
+  },
   server: {
     port: 3000, // default: 3000
     host: '0.0.0.0', // (yay we can test mobile) default: localhost

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { debounce } from 'lodash/function';
+import debounce from 'lodash.debounce';
 export default {
   mounted() {
     console.log('chart page mounted');
