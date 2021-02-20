@@ -3,7 +3,7 @@
     <axis-selector
       v-model="yAxisAttribute"
       axis="y"
-      :axis-options="axisOptions"
+      :axis-options="yAxisOptions"
     ></axis-selector>
     <div id="chart" ref="chart">
       <div v-if="chartData.length === 0" class="chart-empty">no data</div>
@@ -11,7 +11,7 @@
     <axis-selector
       v-model="xAxisAttribute"
       axis="x"
-      :axis-options="axisOptions"
+      :axis-options="xAxisOptions"
     ></axis-selector>
   </div>
 </template>
@@ -31,7 +31,7 @@ vega.expressionFunction('hello', function (datum, params) {
   return theBean.name;
 });
 
-const axisConfigs = {
+const xAxisConfigs = {
   date: {
     field: 'date',
     type: 'temporal',
@@ -52,21 +52,39 @@ const axisConfigs = {
     type: 'quantitative',
     title: 'rating',
   },
-  mean_rating: {
+  bean_id: {
+    field: 'bean.id',
+    type: 'nominal',
+    title: 'bean',
+    axis: {
+      format: 'bean.name',
+      formatType: 'hello',
+      labelAngle: -65,
+    },
+  },
+};
+
+const yAxisConfigs = {
+  grinds_oz: {
+    field: 'grinds_oz',
+    type: 'quantitative',
+    title: 'grinds amount',
+  },
+  batch_size_oz: {
+    field: 'batch_size_oz',
+    type: 'quantitative',
+    title: 'batch size',
+  },
+  rating: {
     field: 'rating',
     type: 'quantitative',
-    title: 'mean rating',
-    aggregate: 'mean',
+    title: 'rating',
   },
   bean_id: {
     field: 'bean.id',
     type: 'nominal',
     title: 'bean',
     axis: {
-      // labelExpr: 'datum.label',
-      // was trying to use the parent datum in the formatting but that seems to be tricky
-      // I mean, we could look up the bean by its id again just to get its name, but that seems like a lot...
-      format: 'bean.name',
       formatType: 'hello',
       labelAngle: -65,
     },
@@ -82,7 +100,8 @@ export default {
       chart: undefined,
       xAxisAttribute: 'date',
       yAxisAttribute: 'rating',
-      axisOptions: Object.entries(axisConfigs),
+      xAxisOptions: Object.entries(xAxisConfigs),
+      yAxisOptions: Object.entries(yAxisConfigs),
     };
   },
 
@@ -102,8 +121,8 @@ export default {
       result.data = {
         values: this.chartData,
       };
-      result.encoding.x = axisConfigs[this.xAxisAttribute];
-      result.encoding.y = axisConfigs[this.yAxisAttribute];
+      result.encoding.x = xAxisConfigs[this.xAxisAttribute];
+      result.encoding.y = yAxisConfigs[this.yAxisAttribute];
       result = specHelpers.adjustLegendLayout(result, this.windowWidth);
       result = specHelpers.adjustFontSizes(result, this.windowWidth);
       result = specHelpers.adjustFontFamily(result, 'Yantramanav');
