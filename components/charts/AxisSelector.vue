@@ -2,8 +2,8 @@
   <div :class="`axis-selectors-wrapper ${axis}`">
     <label :for="`${axis}-axis`">{{ axis.toUpperCase() }} Axis: </label>
     <select :id="`${axis}-axis`" v-model="selection" :name="`${axis}-axis`">
-      <option v-for="pair in axisOptions" :key="pair[0]" :value="pair[0]">
-        {{ pair[1].title }}
+      <option v-for="config in axisOptions" :key="config.field" :value="config">
+        {{ config.title }}
       </option>
     </select>
   </div>
@@ -14,7 +14,7 @@ export default {
   props: {
     axis: String,
     axisOptions: Array,
-    value: String,
+    value: Object,
   },
   data() {
     return {

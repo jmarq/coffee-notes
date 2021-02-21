@@ -30,28 +30,28 @@ vega.expressionFunction('beanNameFromId', function (datum) {
   return theBean.name;
 });
 
-const xAxisConfigs = {
-  date: {
+const xAxisConfigs = [
+  {
     field: 'date',
     type: 'temporal',
     title: 'date',
   },
-  grinds_oz: {
+  {
     field: 'grinds_oz',
     type: 'quantitative',
     title: 'grinds amount',
   },
-  batch_size_oz: {
+  {
     field: 'batch_size_oz',
     type: 'quantitative',
     title: 'batch size',
   },
-  rating: {
+  {
     field: 'rating',
     type: 'quantitative',
     title: 'rating',
   },
-  bean_id: {
+  {
     field: 'bean.id',
     type: 'nominal',
     title: 'bean',
@@ -60,25 +60,25 @@ const xAxisConfigs = {
       labelAngle: -65,
     },
   },
-};
+];
 
-const yAxisConfigs = {
-  grinds_oz: {
+const yAxisConfigs = [
+  {
     field: 'grinds_oz',
     type: 'quantitative',
     title: 'grinds amount',
   },
-  batch_size_oz: {
+  {
     field: 'batch_size_oz',
     type: 'quantitative',
     title: 'batch size',
   },
-  rating: {
+  {
     field: 'rating',
     type: 'quantitative',
     title: 'rating',
   },
-  bean_id: {
+  {
     field: 'bean.id',
     type: 'nominal',
     title: 'bean',
@@ -87,7 +87,11 @@ const yAxisConfigs = {
       labelAngle: -65,
     },
   },
-};
+];
+
+function getAxisConfigByFieldString(configs, fieldString) {
+  return configs.find((c) => c.field === fieldString);
+}
 
 export default {
   components: {
@@ -96,10 +100,10 @@ export default {
   data() {
     return {
       chart: undefined,
-      xAxisAttribute: 'date',
-      yAxisAttribute: 'rating',
-      xAxisOptions: Object.entries(xAxisConfigs),
-      yAxisOptions: Object.entries(yAxisConfigs),
+      xAxisAttribute: getAxisConfigByFieldString(xAxisConfigs, 'date'),
+      yAxisAttribute: getAxisConfigByFieldString(yAxisConfigs, 'rating'),
+      xAxisOptions: xAxisConfigs,
+      yAxisOptions: yAxisConfigs,
     };
   },
 
@@ -119,8 +123,8 @@ export default {
       result.data = {
         values: this.chartData,
       };
-      result.encoding.x = xAxisConfigs[this.xAxisAttribute];
-      result.encoding.y = yAxisConfigs[this.yAxisAttribute];
+      result.encoding.x = this.xAxisAttribute;
+      result.encoding.y = this.yAxisAttribute;
       result = specHelpers.adjustLegendLayout(result, this.windowWidth);
       result = specHelpers.adjustFontSizes(result, this.windowWidth);
       result = specHelpers.adjustFontFamily(result, 'Yantramanav');
@@ -144,8 +148,19 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    this.destroyChart();
+  },
+
   methods: {
+    destroyChart() {
+      if (this.chart) {
+        console.log('tearing down existing batch chart');
+        this.chart.finalize();
+      }
+    },
     drawChart() {
+      this.destroyChart();
       if (this.chartData.length === 0) {
         return;
       }
