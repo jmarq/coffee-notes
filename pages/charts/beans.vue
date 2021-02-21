@@ -26,7 +26,7 @@ import Bean from '@/models/Bean';
 import beanBar from '@/helpers/vegaSpecs/beanBar';
 import * as specHelpers from '@/helpers/vegaSpecs/specHelpers';
 
-vega.expressionFunction('beanNameFromId', function (datum, params) {
+vega.expressionFunction('beanNameFromId', function (datum) {
   const theBean = Bean.find(datum);
   return theBean.name;
 });
@@ -93,8 +93,6 @@ export default {
         .filter((batch) => batch.rating);
     },
     vegaLiteSpec() {
-      // probably break this into a separate file to import/reuse
-      // it is kind of chunky to be eating up so much editor space in this page file.
       let result = {
         ...beanBar,
       };
@@ -148,8 +146,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-/* this style section isn't `scoped` because it targets the vega-created element */
-// look into "deep selectors" in vue as a potential solution for this.
-</style>

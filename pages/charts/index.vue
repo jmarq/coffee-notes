@@ -25,8 +25,7 @@ import Bean from '@/models/Bean';
 import batchScatter from '@/helpers/vegaSpecs/batchScatter';
 import * as specHelpers from '@/helpers/vegaSpecs/specHelpers';
 
-vega.expressionFunction('hello', function (datum, params) {
-  // this is probably too inefficient once we have a lot of beans
+vega.expressionFunction('beanNameFromId', function (datum) {
   const theBean = Bean.find(datum);
   return theBean.name;
 });
@@ -57,8 +56,7 @@ const xAxisConfigs = {
     type: 'nominal',
     title: 'bean',
     axis: {
-      format: 'bean.name',
-      formatType: 'hello',
+      formatType: 'beanNameFromId',
       labelAngle: -65,
     },
   },
@@ -161,18 +159,9 @@ export default {
           // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
           console.log('chart has rendered');
           that.chart = result;
-          // console.log(that.chart.view.getState());
-          // that.chart.view.addSignalListener('highlight', (name, value) => {
-          //   console.log(name);
-          //   console.log(value);
-          // });
         })
         .catch((err) => console.log(err));
     },
   },
 };
 </script>
-
-<style lang="scss">
-/* this style section isn't `scoped` because it targets the vega-created element */
-</style>
