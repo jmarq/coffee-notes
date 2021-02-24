@@ -54,7 +54,15 @@ export default {
         value: '#b29',
       },
     },
-    size: { field: 'grind_size', type: 'q' },
+    size: {
+      field: 'grind_size',
+      type: 'q',
+      // this symbolFillColor seems to be overwritten by the selection condition color
+      // which is weird because you wouldn't think that the legend marks would be 'selected'
+      legend: {
+        symbolFillColor: 'black',
+      },
+    },
     detail: [
       {
         field: 'note',

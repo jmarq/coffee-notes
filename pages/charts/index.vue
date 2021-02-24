@@ -83,7 +83,7 @@ const yAxisConfigs = [
     type: 'nominal',
     title: 'bean',
     axis: {
-      formatType: 'hello',
+      formatType: 'beanNameFromId',
       labelAngle: -65,
     },
   },
