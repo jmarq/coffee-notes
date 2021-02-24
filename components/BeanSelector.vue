@@ -17,7 +17,7 @@ import SelectedBean from './SelectedBean';
 
 export default {
   props: {
-    initialBean: String,
+    initialBean: { type: String, default: undefined },
   },
   components: { SelectedBean },
   data() {

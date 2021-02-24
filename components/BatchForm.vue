@@ -88,7 +88,10 @@ const getInitialDataForEdit = (editingBatch) => {
 export default {
   components: { BeanForm, BeanSelector },
   props: {
-    editingBatch: Object,
+    editingBatch: {
+      type: Object,
+      default: undefined,
+    },
   },
   data() {
     let result = {};

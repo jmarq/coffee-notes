@@ -25,7 +25,10 @@
 import { allBatches } from '@/helpers/dataHelpers';
 export default {
   props: {
-    createdBatch: String,
+    createdBatch: {
+      type: String,
+      default: undefined,
+    },
   },
   computed: {
     batches: () => {

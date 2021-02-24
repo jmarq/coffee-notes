@@ -12,9 +12,9 @@
 <script>
 export default {
   props: {
-    axis: String,
-    axisOptions: Array,
-    value: Object,
+    axis: { type: String, default: 'X' },
+    axisOptions: { type: Array, default: () => [] },
+    value: { type: Object, default: undefined },
   },
   data() {
     return {

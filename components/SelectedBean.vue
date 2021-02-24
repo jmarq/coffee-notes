@@ -10,7 +10,7 @@
 <script>
 import Bean from '@/models/Bean';
 export default {
-  props: { beanId: String },
+  props: { beanId: { type: String, required: true } },
   computed: {
     bean() {
       return Bean.find(this.beanId);
