@@ -8,12 +8,30 @@ export const allBeans = () => {
   return Bean.all();
 };
 
+export const findBean = (beanId) => {
+  return Bean.find(beanId);
+};
+
 export const allBatches = () => {
   return Batch.query().with('bean').orderBy('date', 'desc').get();
 };
 
 export const mostRecentBatch = () => {
   return Batch.query().with('bean').orderBy('date', 'desc').first();
+};
+
+export const createBatch = (payload) => {
+  return Batch.$create({
+    data: payload,
+  }).then((result) => {
+    // result is an array when using localforage create
+    // array might contain a bean or a batch depending on the creation
+    // pick the result that has a "note" or some other batch-specific field?
+    const createdBatch = result.filter(
+      (r) => typeof r.batch_size_oz !== 'undefined'
+    )[0];
+    return createdBatch;
+  });
 };
 
 export const deleteBatch = (batchId) => {

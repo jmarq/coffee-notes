@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import Bean from '@/models/Bean';
+import { findBean } from '@/helpers/dataHelpers';
 export default {
   props: { beanId: { type: String, required: true } },
   computed: {
     bean() {
-      return Bean.find(this.beanId);
+      return findBean(this.beanId);
     },
   },
 };

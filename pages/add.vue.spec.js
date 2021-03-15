@@ -8,8 +8,8 @@ import VuexORMLocalForage from 'vuex-orm-localforage';
 import database from '@/database';
 
 import flushPromises from 'flush-promises';
-import Batch from '@/models/Batch';
 import Bean from '@/models/Bean';
+import * as dataHelpers from '@/helpers/dataHelpers';
 
 const localVue = createLocalVue();
 
@@ -48,7 +48,7 @@ describe('add page', () => {
       mutations,
       plugins,
     });
-    jest.spyOn(Batch, '$create');
+    jest.spyOn(dataHelpers, 'createBatch');
     await Bean.insert({
       data: { name: 'testBean', roast_profile: 'medium' },
     });
@@ -95,7 +95,7 @@ describe('add page', () => {
     await theButton.trigger('click');
     await flushPromises();
 
-    expect(Batch.$create).toHaveBeenCalled();
+    expect(dataHelpers.createBatch).toHaveBeenCalled();
     expect(mockRouter.push).toHaveBeenCalled();
   });
 });

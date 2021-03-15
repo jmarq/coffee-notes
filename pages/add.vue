@@ -5,22 +5,14 @@
 </template>
 
 <script>
-import Batch from '@/models/Batch';
 import BatchForm from '@/components/BatchForm';
+import { createBatch } from '@/helpers/dataHelpers';
 
 export default {
   components: { BatchForm },
   methods: {
     addBatch(payload) {
-      Batch.$create({
-        data: payload,
-      }).then((result) => {
-        // result is an array when using localforage create
-        // array might contain a bean or a batch depending on the creation
-        // pick the result that has a "note" or some other batch-specific field?
-        const createdBatch = result.filter(
-          (r) => typeof r.batch_size_oz !== 'undefined'
-        )[0];
+      createBatch(payload).then((createdBatch) => {
         this.$router.push({ path: '/', query: { newId: createdBatch.id } });
       });
     },

@@ -4,8 +4,8 @@
       <form @submit.prevent>
         <label for="bean-name" required>Bean Name</label>
         <input id="bean-name" v-model="newBean.name" type="text" required />
-        <label for="roast-profile" required>Roast Profile</label>
 
+        <label for="roast-profile" required>Roast Profile</label>
         <select id="roast-profile" v-model="newBean.roast_profile" required>
           <option
             v-for="profile in roastProfileOptions"
