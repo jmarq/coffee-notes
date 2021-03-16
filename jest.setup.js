@@ -31,6 +31,7 @@ const resetConfig = {
     indicator: false,
     terser: false,
   },
+  buildDir: '.test-nuxt',
 };
 
 // we take our nuxt config, lay the resets on top of it,
@@ -41,11 +42,12 @@ const config = Object.assign({}, nuxtConfig, resetConfig, {
   ignore: ['**/components/**/*', '**/layouts/**/*', '**/pages/**/*'],
 });
 
-const buildNuxt = () => {
+const buildNuxt = async () => {
   const nuxt = new Nuxt(config);
   // commented this out because it was breaking the dev server when it ran during tests.
   // unsure of its implications, as I copied this from a blog post trying to get a "real" store in place.
-  // await new Builder(nuxt).build();
+  // UPDATE: I'm thinking ommiting this breaks the tests on CI, since it doesn't build the nuxt store.
+  await new Builder(nuxt).build();
   return nuxt;
 };
 
@@ -55,4 +57,5 @@ module.exports = async () => {
   // we surface this path as an env var now
   // so we can import the store dynamically later on
   process.env.buildDir = nuxt.options.buildDir;
+
 };
