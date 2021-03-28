@@ -98,15 +98,13 @@ export default {
   tbody {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   tr {
     display: block;
     @apply mx-4;
   }
-  tr {
-    border-bottom: 1px solid #aaa !important;
-  }
+
   td.key {
     color: #bed;
   }
