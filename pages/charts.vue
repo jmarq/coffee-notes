@@ -74,42 +74,61 @@ export default {
   }
 }
 
+// hack the tooltips to render in a predictably-on-screen position when screen gets narrow.
+@media screen and (max-width: 600px) {
+  #vg-tooltip-element,
+  #vg-tooltip-element[style] {
+    // .visible {
+    //   pointer-events: none;
+    // }
+    &:not(.visible) {
+      pointer-events: none;
+      opacity: 0;
+    }
+    border: none;
+    transition: 300ms ease-in;
+    font-size: 12px;
+    @screen md {
+      font-size: 16px;
+    }
+    top: 0 !important;
+    width: 100%;
+    left: 0 !important;
+    position: fixed;
+    table,
+    tbody {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    tr {
+      display: block;
+      @apply mx-4;
+    }
+
+    td.key {
+      color: #bed;
+    }
+    td.value {
+      display: block;
+      color: #eee;
+    }
+  }
+}
 // there is a bug where these can stay locked visible if the use uses the browser back button to navigate away from the page
 #vg-tooltip-element,
 #vg-tooltip-element[style] {
-  // .visible {
-  //   pointer-events: none;
-  // }
-  &:not(.visible) {
-    pointer-events: none;
-    opacity: 0;
-  }
   border: none;
-  transition: 300ms ease-in;
+  // transition: 300ms ease-in;
   font-size: 12px;
   @screen md {
     font-size: 16px;
-  }
-  top: 0 !important;
-  width: 100%;
-  left: 0 !important;
-  position: fixed;
-  table,
-  tbody {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-  tr {
-    display: block;
-    @apply mx-4;
   }
 
   td.key {
     color: #bed;
   }
   td.value {
-    display: block;
     color: #eee;
   }
 }
