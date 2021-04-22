@@ -14,6 +14,10 @@ export default class Batch extends Model {
       date: this.number(undefined).nullable(),
       grind_size: this.number(undefined).nullable(),
       batch_size_oz: this.number(undefined).nullable(),
+      // g makes more sense as a unit for grounds.
+      // need to look into migration path for changing a field name
+      // deprecate the field and create a new one?
+      // helper methods for converting/hydrating new field?
       grinds_oz: this.number(undefined).nullable(),
       rating: this.number(undefined).nullable(),
     };
